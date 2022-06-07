@@ -5,6 +5,7 @@
   "scripts": {
     "client-build-prod": "webpack --config webpack_conf/webpack.prod.js",
     "client-build-dev": "webpack --config webpack_conf/webpack.dev.js",
+    "start": "nodemon server/index.js",
     "debug": "nodemon --inspect index.js",
     "starts": "npm run client-build"
   },
