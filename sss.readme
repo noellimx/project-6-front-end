@@ -1,0 +1,76 @@
+// Bundler
+"@babel/core": "^7.12.10",
+"@babel/plugin-transform-runtime": "^7.14.5",
+"@babel/preset-env": "^7.12.11",
+"@babel/preset-react": "^7.16.7",
+"@babel/preset-typescript": "^7.16.7",
+"@babel/register": "^7.17.7",
+"babel-loader": "^8.2.2",
+"babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+"webpack": "^5.70.0",
+"webpack-cli": "^4.3.0",
+"webpack-merge": "^5.7.3"
+"style-loader": "^3.3.1",
+"svg-url-loader": "^7.1.1",
+"ts-loader": "^9.2.8",
+"css-loader": "^5.2.7",
+"file-loader": "^6.2.0",
+"sass": "^1.30.0",
+"sass-loader": "^10.1.0",
+"html-webpack-plugin": "^4.5.1",
+"mini-css-extract-plugin": "^1.3.3",
+
+
+"typescript": "^4.6.3",
+"@types/react-dom": "^18.0.1",
+
+
+// Map
+"@types/leaflet": "^1.7.9",
+"leaflet": "^1.8.0",
+
+// React (w / Redux) + Typescript 
+
+"@mui/material": "^5.6.2",
+"@reduxjs/toolkit": "^1.8.1",
+"@emotion/react": "^11.9.0",
+"@emotion/styled": "^11.8.1",
+"react": "^18.0.0",
+"react-countdown": "^2.3.2",
+"react-dom": "^18.0.0",
+"react-leaflet": "^4.0.0",
+"react-redux": "^8.0.1",
+"react-select": "^5.3.1",
+"redux-thunk": "^2.4.1",
+
+"js-cookie": "^3.0.1",
+
+
+
+
+// Security
+"cookie": "^0.4.2",
+"cookie-parser": "^1.4.5",
+"cors": "^2.8.5",
+"jsonwebtoken": "^8.5.1",
+
+// Communications
+"axios": "^0.21.1",
+"socket.io": "^4.4.1",
+"socket.io-client": "^4.4.1",
+
+// Time schedule
+"node-schedule": "^2.1.0",
+"luxon": "^2.3.2",
+
+// Database (Sequelize + POSTGRES + POSTGIS)
+"pg": "^8.7.3",
+"sequelize": "^6.17.0",
+"sequelize-cli": "^6.2.0",
+
+
+"express": "^4.17.1",
+"nodemon": "^2.0.6",
+
+// Miscelleneous
+"haversine-offset": "^1.0.0",

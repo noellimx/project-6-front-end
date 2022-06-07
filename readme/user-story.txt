@@ -1,0 +1,39 @@
+
+
+
+# 1. Hit Address Bar On Browser
+
+1. As a first-time end user, I can visit the website so that I can explore the features.
+  ** On load, user should see Uncertain Page, client will make a "pre-flight" authentication request to server with existing token **
+  ** Proceeding to authenticated page does not imply the features or data can be obtained. Each client request require a valid token to be fulfilled. **
+  [ ] Unauthenticated
+    [ ] Login Page
+        --UP-- As an confirmed unauthenticated user, I can submit user-password credentials to the server so that I can see logged-in features.
+        [ ] Client sends via socketio
+        [ ] Server receives credentials
+        [ ] Server checks credentials
+        - If Valid 
+          [ ] Server
+            [ ] Form JWT token signed with secret. JWT should have the fields
+              [ ] sub - plain user id
+              [ ] exp - expiry date
+            [ ] Issue to client via the same socket
+          [ ] Client
+            [ ] Stores JWT in local storage
+            [ ] Client assumes token is valid, proceed to Authenticated Page
+        - Else
+          [ ] Display clear error message. 
+    [ ] Uncertain Page
+        --UP-- As an unconfirmed unauthenticated user, I can submit my existing token to the server, so that I can see logged-in features.
+        [ ] Client
+          [ ] send token to server
+        [ ] Server
+          [ ] If valid -> respond as valid
+          [ ] If not valid -> respond as not valid
+        [ ] Client
+          [ ] If valid -> proceed to Authenticated Page
+          [x] If not valid -> proceed to Login Page
+  [ ] Authenticated Page
+
+
+
