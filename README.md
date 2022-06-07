@@ -1,3 +1,6 @@
-# Documentation & Post-Mortem
+# Development 
 
-[notion](https://www.notion.so/orda-79175206ab834ba7b8000384aba509fc)
+## Local
+
+2 terminals - one to run the server that serves the bundled js
+            - one to run webpack --watch
