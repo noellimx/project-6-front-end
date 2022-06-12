@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 
 
 import { MAny } from "./utils/my-types";
-
+import SignIn from "./components/Signin";
 
 
 // UI Injection
@@ -14,4 +14,4 @@ const PAINT = (htmlEle: HTMLElement, rEle: MAny) => {
   createRoot(htmlEle).render(rEle);
 };
 
-PAINT(rootHTMLElement, <div> welcomde </div>);
+PAINT(rootHTMLElement, <div> <SignIn /> </div>);
