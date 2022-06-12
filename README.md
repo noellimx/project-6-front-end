@@ -12,3 +12,11 @@
 
 1. Run prettier with default configurations before pull request.
 2. Import statements to explicitly include file extension, if applicable.
+
+
+## Collaboration Rules
+
+1. PRs to be reviewed by at least 1 other member.
+
+
+HAVE FUN
