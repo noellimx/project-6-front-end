@@ -18,9 +18,7 @@ interface DisplayChart {
 const rootHTMLElement: HTMLElement = document.createElement('div');
 document.body.appendChild(rootHTMLElement);
 
-
 const PAINT = (htmlEle: HTMLElement, rEle: MAny) => {
-
   createRoot(htmlEle).render(rEle);
 };
 

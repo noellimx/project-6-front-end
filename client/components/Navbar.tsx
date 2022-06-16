@@ -11,7 +11,6 @@ export default function MyNavbar() {
       <Container>
         <Navbar.Brand href="/">GoMoon</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <NavDropdown title="Forex" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">EUR/USD</NavDropdown.Item>
@@ -29,7 +28,6 @@ export default function MyNavbar() {
               <NavDropdown.Item href="#action/3.3">stock 3</NavDropdown.Item>
             </NavDropdown>
           </Nav>
-        </Navbar.Collapse>
       </Container>
     </Navbar>
   );

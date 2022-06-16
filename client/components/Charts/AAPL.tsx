@@ -1,4 +1,5 @@
-import React from 'react';
+import * as React from "react";
+
 
 declare const TradingView: any;
 
@@ -29,7 +30,7 @@ type AdvancedChartProps = {
   children?: never;
 };
 
-const AAPLChart = (props: AdvancedChartProps, chart) => {
+const AAPLChart = (props: AdvancedChartProps) => {
   console.log(props);
   const { widgetProps, widgetPropsAny } = props;
 
