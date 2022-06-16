@@ -7,43 +7,24 @@ import LoggedIn from "./pages/LoggedIn";
 import NotLoggedIn from "./pages/NotLoggedIn";
 import { Grid } from "@mui/material";
 
+import MyNavbar from "./Navbar";
+import * as TVW from "react-tradingview-widget"
+
 interface AppProps {
-  client: Client;
 }
 
-const App: React.FC<AppProps> = ({ client }) => {
-  const countOfPing = useSelector((state: TheState) => state.ping);
-  const authenticationStatus = useSelector<TheState, AuthenticationStatus>(
-    (state) => state.authenticationStatus
-  );
 
-  React.useEffect(() => {
-    client.authentication.presentToken();
-  }, []);
+const TradingViewWidget = TVW.default
 
-  return (
-    <>
-      <Grid
-        sx={{ flexDirection: "column" }}
-        alignItems="center"
-        justifyContent="center"
-      >
-        {authenticationStatus === AuthenticationStatus.UNCERTAIN ? (
-          <div>Uncertain User</div>
-        ) : authenticationStatus === AuthenticationStatus.FALSE ? (
-          <Grid>
-            <NotLoggedIn client={client} />
-          </Grid>
-        ) : authenticationStatus === AuthenticationStatus.TRUE ? (
-          <Grid>
-            <LoggedIn client={client} />
-          </Grid>
-        ) : (
-          <></>
-        )}
-      </Grid>
-    </>
-  );
+
+const App: React.FC<AppProps> = () => {
+
+
+
+  const [ticker,setTicker] = React.useState<string>("NASDAQ:AAPL")
+
+  return <><MyNavbar setTicker={setTicker} />
+  <TradingViewWidget symbol={ticker} theme="Dark" /></>
 };
 
 export default App;
