@@ -5,7 +5,7 @@ import cors from "cors";
 
 import bindRoute from "./network/http.js";
 
-const SERVER_LISTENING_PORT = process.env.PORT || 3002;
+const SERVER_LISTENING_PORT = process.env.PORT || 3004;
 const app = express(); // framework
 
 app.use(cors({ origin: "*" }));

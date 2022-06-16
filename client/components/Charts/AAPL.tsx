@@ -1,8 +1,6 @@
-import React from "react";
-
+import React from 'react';
 
 declare const TradingView: any;
-
 
 export type AdvancedChartWidgetProps = {
   width?: string | number;
@@ -23,7 +21,7 @@ export type AdvancedChartWidgetProps = {
   enable_publishing?: boolean;
   allow_symbol_change?: boolean;
   container_id?: string;
-}
+};
 
 type AdvancedChartProps = {
   widgetProps?: AdvancedChartWidgetProps;
@@ -31,49 +29,48 @@ type AdvancedChartProps = {
   children?: never;
 };
 
-const AAPLChart = (props: AdvancedChartProps) => {
+const AAPLChart = (props: AdvancedChartProps, chart) => {
+  console.log(props);
   const { widgetProps, widgetPropsAny } = props;
 
-  let containerId = "advanced-chart-widget-container";
+  let containerId = 'advanced-chart-widget-container';
   if (widgetProps?.container_id) {
     containerId = widgetProps?.container_id;
   }
 
-  const ref: {current: HTMLDivElement | null} = React.createRef();
+  const ref: { current: HTMLDivElement | null } = React.createRef();
 
   React.useEffect(() => {
     let refValue: any;
 
     if (ref.current) {
-      const script = document.createElement("script");
-      script.src = "https://s3.tradingview.com/tv.js";
+      const script = document.createElement('script');
+      script.src = 'https://s3.tradingview.com/tv.js';
       script.async = true;
       script.onload = () => {
-        if (typeof TradingView !== "undefined") {
-          new TradingView.widget(
-            {
-              "width": "100%",
-              "height": "640px",
-              "symbol": "NASDAQ:AAPL",
-              "interval": "240",
-              "range": "1M",
-              "timezone": "Etc/UTC",
-              "theme": "dark",
-              "style": "9",
-              "locale": "en",
-              "toolbar_bg": "rgba(0, 0, 0, 0.8)",
-              "hide_top_toolbar": false,
-              "hide_side_toolbar": false,
-              "withdateranges": true,
-              "save_image": true,
-              "enable_publishing": false,
-              "container_id": containerId,
-              ...widgetProps,
-              ...widgetPropsAny,
-            }
-          );
+        if (typeof TradingView !== 'undefined') {
+          new TradingView.widget({
+            width: '100%',
+            height: '640px',
+            symbol: 'NASDAQ:AAPL',
+            interval: '240',
+            range: '1M',
+            timezone: 'Etc/UTC',
+            theme: 'dark',
+            style: '9',
+            locale: 'en',
+            toolbar_bg: 'rgba(0, 0, 0, 0.8)',
+            hide_top_toolbar: false,
+            hide_side_toolbar: false,
+            withdateranges: true,
+            save_image: true,
+            enable_publishing: false,
+            container_id: containerId,
+            ...widgetProps,
+            ...widgetPropsAny,
+          });
         }
-      }
+      };
       ref.current.appendChild(script);
       refValue = ref.current;
     }
@@ -84,10 +81,10 @@ const AAPLChart = (props: AdvancedChartProps) => {
           refValue.removeChild(refValue.firstChild);
         }
       }
-    }
+    };
   }, [ref, widgetProps, widgetPropsAny, containerId]);
 
   return <div id={containerId} ref={ref} />;
-}
+};
 
 export default AAPLChart;
