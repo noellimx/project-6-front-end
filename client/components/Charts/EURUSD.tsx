@@ -32,7 +32,7 @@ type AdvancedChartProps = {
 const EURUSDChart = (props: AdvancedChartProps) => {
   const { widgetProps, widgetPropsAny } = props;
 
-  let containerId = 'advanced-chart-widget-container';
+  let containerId = "advanced-chart-widget-container";
   if (widgetProps?.container_id) {
     containerId = widgetProps?.container_id;
   }
@@ -43,22 +43,22 @@ const EURUSDChart = (props: AdvancedChartProps) => {
     let refValue: any;
 
     if (ref.current) {
-      const script = document.createElement('script');
-      script.src = 'https://s3.tradingview.com/tv.js';
+      const script = document.createElement("script");
+      script.src = "https://s3.tradingview.com/tv.js";
       script.async = true;
       script.onload = () => {
-        if (typeof TradingView !== 'undefined') {
+        if (typeof TradingView !== "undefined") {
           new TradingView.widget({
-            width: '100%',
-            height: '640px',
-            symbol: 'FX:EURUSD',
-            interval: '240',
-            range: '1M',
-            timezone: 'Etc/UTC',
-            theme: 'dark',
-            style: '9',
-            locale: 'en',
-            toolbar_bg: 'rgba(0, 0, 0, 0.8)',
+            width: "100%",
+            height: "640px",
+            symbol: "FX:EURUSD",
+            interval: "240",
+            range: "1M",
+            timezone: "Etc/UTC",
+            theme: "dark",
+            style: "9",
+            locale: "en",
+            toolbar_bg: "rgba(0, 0, 0, 0.8)",
             hide_top_toolbar: false,
             hide_side_toolbar: false,
             withdateranges: true,
