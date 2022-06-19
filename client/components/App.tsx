@@ -20,7 +20,12 @@ const App: React.FC<AppProps> = () => {
   return (
     <>
       <MyNavbar setTicker={setTicker} />
-      <TradingViewWidget symbol={ticker} theme="Dark" />
+      <TradingViewWidget
+        symbol={ticker}
+        theme="Dark"
+        hide_side_toolbar={false}
+        allow_symbol_change={false}
+      />
     </>
   );
 };

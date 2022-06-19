@@ -4,7 +4,7 @@ import { Store } from "redux";
 import { ReactNode } from "react";
 import { SelectChangeEvent } from "@mui/material";
 
-export type MAny = any;
+export type MAny = any; // This type indicates to be defined explicitly
 
 export type TrulyImpure = () => void;
 

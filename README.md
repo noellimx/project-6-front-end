@@ -1,10 +1,12 @@
+## Clean Code
+
+- run prettier -w . for default formatting
+- tsconfig should refer to in-repo always
+- import statements to explicitly indicate extension
+
 # Development
 
 `npm i` install package for new pulls
-
-## Clean Code
-
-run prettier -w . for default formatting
 
 ## Dev Server
 
