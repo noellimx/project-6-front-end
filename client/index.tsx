@@ -28,7 +28,7 @@ const PAINT = (htmlEle: HTMLElement, rEle: MAny) => {
 PAINT(
   rootHTMLElement,
   <div>
-    {/* <App /> */}
-    <App2 />
+    <App />
+    
   </div>
 );

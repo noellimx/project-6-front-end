@@ -58,13 +58,14 @@ export default function MyNavbar({ setTicker }) {
           <NavDropdown title="Favourites" id="basic-nav-dropdown">
             {favs.map(({ symbol, desc }) => {
               return (
-                <NavDropdown.Item
+                <NavDropdown.Item key={symbol}
                   onClick={() => {
                     setTicker(symbol);
                   }}
                 >
                   {" "}
                   {desc}
+                  
                 </NavDropdown.Item>
               );
             })}
