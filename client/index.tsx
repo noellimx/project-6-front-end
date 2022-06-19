@@ -9,7 +9,7 @@ import { MAny } from "./utils/my-types";
 // import EURUSDChart from "./components/Charts/EURUSD";
 import MyNavbar from "./components/Navbar";
 
-import App from "./components/App"
+import App from "./components/App";
 interface DisplayChart {
   chart: string;
 }
@@ -23,10 +23,9 @@ const PAINT = (htmlEle: HTMLElement, rEle: MAny) => {
   createRoot(htmlEle).render(rEle);
 };
 
-
 PAINT(
   rootHTMLElement,
   <div>
-    <App/>
+    <App />
   </div>
 );

@@ -8,23 +8,21 @@ import NotLoggedIn from "./pages/NotLoggedIn";
 import { Grid } from "@mui/material";
 
 import MyNavbar from "./Navbar";
-import * as TVW from "react-tradingview-widget"
+import * as TVW from "react-tradingview-widget";
 
-interface AppProps {
-}
+interface AppProps {}
 
-
-const TradingViewWidget = TVW.default
-
+const TradingViewWidget = TVW.default;
 
 const App: React.FC<AppProps> = () => {
+  const [ticker, setTicker] = React.useState<string>("NASDAQ:AAPL");
 
-
-
-  const [ticker,setTicker] = React.useState<string>("NASDAQ:AAPL")
-
-  return <><MyNavbar setTicker={setTicker} />
-  <TradingViewWidget symbol={ticker} theme="Dark" /></>
+  return (
+    <>
+      <MyNavbar setTicker={setTicker} />
+      <TradingViewWidget symbol={ticker} theme="Dark" />
+    </>
+  );
 };
 
 export default App;
