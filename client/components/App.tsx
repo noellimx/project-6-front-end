@@ -35,6 +35,8 @@ export const sendMessageToTickerRoom: SendMessageToTickerRoom = async (
   socket,
   { token, message, roomId }
 ) => {
+
+  console.log(`[sendMessageToTickerRoom] ` , {token, message,roomId})
   const event = "send-to-ticker-room";
   const data = { token, message, roomId, event };
   socket.send(JSON.stringify(data));

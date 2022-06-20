@@ -65,7 +65,12 @@ const ChatFooter = ({ socket, ticker, token }) => {
 
   const [textField, setTextField] = useState<string>("");
 
-  const sendThisMessage = () => sendMessage(socket, roomId, token, textField);
+  const sendThisMessage = () => {
+    console.log(`[sendThisMessage]`)
+    sendMessage(socket, roomId, token, textField)
+
+
+  };
   return (
     <div className="chat-footer">
       <input
