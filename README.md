@@ -5,6 +5,7 @@
 - import statements to explicitly indicate extension
 
 # Development
+```npm i``` install package for new pulls
 
 `npm i` install package for new pulls
 
@@ -28,4 +29,5 @@ file should be `client/config.js`
 
 ## Local
 
-2 terminals - one to run the server that serves the bundled js `npm run start` - one to run webpack --watch `npm run client-build-dev`
+2 terminals - one to run the server that serves the bundled js ```npm run start``` \
+            - one to run webpack --watch ```npm run client-build-dev```
