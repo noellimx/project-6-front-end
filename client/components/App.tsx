@@ -12,32 +12,53 @@ import * as TVW from "react-tradingview-widget";
 import Oldchat from "./OldChat";
 import Signin from "./Signin";
 import Rss from "./Rss";
+
+import config from "../config";
+
 type MockWebSocket = {
   send: (_: string) => void;
-  onconnect: (fn: OnConnectionCallback) => void;
+  onopen: (fn: onopenionCallback) => void;
 };
 
-type OnConnectionCallback = () => void;
+const foo = (): void => {}; // return void
+const bar = (): null => null; // return null
+const baz = (): undefined => undefined; // return defined
+
+type onopenionCallback = () => void;
+
+type SendMessageToTickerRoom = (
+  s: WebSocket | MockWebSocket,
+  data: { roomId: string; token: string; message: string }
+) => Promise<void>;
+
+export const sendMessageToTickerRoom: SendMessageToTickerRoom = async (
+  socket,
+  { token, message, roomId }
+) => {
+  const event = "send-to-ticker-room";
+  const data = { token, message, roomId, event };
+  socket.send(JSON.stringify(data));
+};
 
 function getCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0;i < ca.length;i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-    }
-    return null;
+  var nameEQ = name + "=";
+  var ca = document.cookie.split(";");
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == " ") c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
 }
 
-const getToken =  () => {
-  return getCookie("Token") || ""
-}
+const getToken = () => {
+  return getCookie("Token") || "";
+};
 
 const newMockWS = (address): MockWebSocket => {
   console.log(`[MOCK] NOT CONNECT TO ADDRESS : ${address}`);
 
-  const onConnectionFnList: OnConnectionCallback[] = [];
+  let onopen = () => {};
 
   let isConnected = false;
 
@@ -46,27 +67,23 @@ const newMockWS = (address): MockWebSocket => {
   setTimeout(() => {
     console.log(`[MOCK] websocket established`);
     isConnected = true;
-    for (const cb of onConnectionFnList) {
-      cb();
-    }
+    onopen();
   }, TIME_TO_CONNECT_FAKE_MS);
 
-  return {
-    send: async (data: string) => {
-      if (isConnected) {
-        console.log(
-          `[MOCK] data to be sent : ${data} <NO DATA IS ACTUALLY SENT`
-        );
-      } else {
-        new Error(
-          `Although this is a mock, a mock connection should be established before sending data`
-        );
-      }
-    },
+  const send = async (data: string) => {
+    if (isConnected) {
+      console.log(`[MOCK] data to be sent : ${data} <NO DATA IS ACTUALLY SENT`);
+    } else {
+      new Error(
+        `Although this is a mock, a mock connection should be established before sending data`
+      );
+    }
+  };
 
-    onconnect: (cb) => {
-      onConnectionFnList.push(cb);
-    },
+  return {
+    send,
+
+    onopen,
   };
 };
 
@@ -85,10 +102,23 @@ const App: React.FC<AppProps> = () => {
   const [token, setToken] = React.useState<string>(getToken());
 
   React.useEffect(() => {
-    const _socket = newMockWS("mockhost:65336");
-    _socket.onconnect(() => {
-      setSocket(_socket);
-    });
+    const _socket =
+      config.env === "production"
+        ? new WebSocket("wss://" + config.wsserver)
+        : newMockWS("wss://mockhost:65336");
+    // const _socket = config.env === "production" ? new WebSocket(config.wsserver) : config.env === "test" ?  newMockWS("mockhost:65336") : null);
+
+    if (_socket === null) {
+      throw new Error(
+        `Socket inialization does not support environment ${config.env}`
+      );
+    } else {
+      _socket.onopen = () => {
+        setSocket(_socket);
+      };
+    }
+
+    return () => {};
   }, []);
 
   return (
@@ -104,8 +134,7 @@ const App: React.FC<AppProps> = () => {
             hide_side_toolbar={false}
             allow_symbol_change={false}
           />
-          <Oldchat token={token} ticker={ticker} socket={socket} <Rss/>/>{" "}
-          <Rss/>
+          <Oldchat token={token} ticker={ticker} socket={socket} /> <Rss />
         </>
       )}
     </>
