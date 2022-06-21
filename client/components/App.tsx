@@ -20,19 +20,19 @@ type MockWebSocket = {
 type OnConnectionCallback = () => void;
 
 function getCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0;i < ca.length;i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-    }
-    return null;
+  var nameEQ = name + "=";
+  var ca = document.cookie.split(";");
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == " ") c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
 }
 
-const getToken =  () => {
-  return getCookie("Token") || ""
-}
+const getToken = () => {
+  return getCookie("Token") || "";
+};
 
 const newMockWS = (address): MockWebSocket => {
   console.log(`[MOCK] NOT CONNECT TO ADDRESS : ${address}`);
@@ -97,22 +97,20 @@ const App: React.FC<AppProps> = () => {
         <Signin />
       ) : (
         <>
-        
           <MyNavbar setTicker={setTicker} />
           <div className="div-container">
-          
-          <TradingViewWidget
-            symbol={ticker}
-            theme="Dark"
-            hide_side_toolbar={false}
-            allow_symbol_change={false}
+            <TradingViewWidget
+              symbol={ticker}
+              theme="Dark"
+              hide_side_toolbar={false}
+              allow_symbol_change={false}
             />
-            
-              <Oldchat token={token} ticker={ticker} socket={socket}/> 
-          <div className ="div-element2">
-          <Rss/>    
+
+            <Oldchat token={token} ticker={ticker} socket={socket} />
+            <div className="div-element2">
+              <Rss />
+            </div>
           </div>
-          </div>  
         </>
       )}
     </>

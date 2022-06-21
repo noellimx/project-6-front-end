@@ -57,18 +57,13 @@ const sendMessage = async (
   setMessageList: MAny,
   setTextFied: MAny
 ) => {
+  const date = new Date();
+  const time =
+    date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 
-  const date = new Date()
-  const time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-  //append message immediately to chat body table
-  setMessageList(messageList=>[...messageList, 
-    {author: token,
-     message: message,
-     time: time}])
-     
   //send message to socket
-  setTextFied("")
-  const data = { token, message, roomId };
+  setTextFied("");
+  const data = { event: "send-to-ticker-room", token, message, roomId, time };
   socket.send(JSON.stringify(data));
 
   //todo, add chat to DB
@@ -79,7 +74,8 @@ const ChatFooter = ({ socket, ticker, token, setMessageList }) => {
 
   const [textField, setTextField] = useState<string>("");
 
-  const sendThisMessage = () => sendMessage(socket, roomId, token, textField, setMessageList, setTextField);
+  const sendThisMessage = () =>
+    sendMessage(socket, roomId, token, textField, setMessageList, setTextField);
   return (
     <div className="chat-footer">
       <input
@@ -104,7 +100,6 @@ const Chat: React.FC<ChatProps> = ({ socket, ticker, token }) => {
         setMessageList((list: MAny) => [...list, data]);
       });
 
-     
     return;
   }, []);
 
@@ -112,7 +107,12 @@ const Chat: React.FC<ChatProps> = ({ socket, ticker, token }) => {
     <div className="chat-window">
       <ChatHeader />
       <ChatBody messageList={messageList} />
-      <ChatFooter socket={socket} ticker={ticker} token={token} setMessageList={setMessageList}/>
+      <ChatFooter
+        socket={socket}
+        ticker={ticker}
+        token={token}
+        setMessageList={setMessageList}
+      />
     </div>
   );
 };
