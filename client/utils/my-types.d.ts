@@ -4,7 +4,6 @@ import { Store } from "redux";
 import { ReactNode } from "react";
 import { SelectChangeEvent } from "@mui/material";
 
-
 export type MAny = any;
 
 export type TrulyImpure = () => void;
