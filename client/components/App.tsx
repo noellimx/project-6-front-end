@@ -108,9 +108,7 @@ const App: React.FC<AppProps> = () => {
             allow_symbol_change={false}
             />
             
-          
               <Oldchat token={token} ticker={ticker} socket={socket}/> 
-          
           <div className ="div-element2">
           <Rss/>    
           </div>
