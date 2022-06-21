@@ -9,12 +9,12 @@ import { Grid } from "@mui/material";
 
 import MyNavbar from "./Navbar";
 import * as TVW from "react-tradingview-widget";
-import Oldchat from "./OldChat";
+import OldChat from "./OldChat";
 import Signin from "./Signin";
 import Rss from "./Rss";
 type MockWebSocket = {
   send: (_: string) => void;
-  onconnect: (fn: OnConnectionCallback) => void;
+  onopen: (fn: OnConnectionCallback) => void;
 };
 
 type OnConnectionCallback = () => void;
@@ -64,7 +64,7 @@ const newMockWS = (address): MockWebSocket => {
       }
     },
 
-    onconnect: (cb) => {
+    onopen: (cb) => {
       onConnectionFnList.push(cb);
     },
   };
@@ -85,10 +85,10 @@ const App: React.FC<AppProps> = () => {
   const [token, setToken] = React.useState<string>(getToken());
 
   React.useEffect(() => {
-    const _socket = newMockWS("mockhost:65336");
-    _socket.onconnect(() => {
+    const _socket =true ? new WebSocket("wss://localhost:8080/ws") : newMockWS("mockhost:65336");
+    _socket.onopen = () => {
       setSocket(_socket);
-    });
+    };
   }, []);
 
   return (
@@ -106,10 +106,10 @@ const App: React.FC<AppProps> = () => {
               allow_symbol_change={false}
             />
 
-            <Oldchat token={token} ticker={ticker} socket={socket} />
-            <div className="div-element2">
+            <OldChat token={token} ticker={ticker} socket={socket} />
+            {/* <div className="div-element2">
               <Rss />
-            </div>
+            </div> */}
           </div>
         </>
       )}

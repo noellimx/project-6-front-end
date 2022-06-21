@@ -1,10 +1,11 @@
-import * as React from "react";
-import { useState, useEffect } from "react";
-import * as ScrollToBottom from "react-scroll-to-bottom";
-import "./App.css";
+import * as React from 'react';
+import { useState, useEffect } from 'react';
+import * as ScrollToBottom from 'react-scroll-to-bottom';
+import './App.css';
 
-import { MAny } from "../utils/my-types";
+import { MAny } from '../utils/my-types';
 
+// import { sendMessageToTickerRoom } from "./App";
 type ChatProps = {
   socket: MAny | WebSocket;
   ticker: string;
@@ -17,10 +18,10 @@ type Message = {
   time: string;
 };
 
-const ChatHeader = () => {
+const ChatHeader = ({ ticker }) => {
   return (
     <div className="chat-header">
-      <p>Live Chat</p>
+      <p>A Live Chat {`${ticker}`}</p>
     </div>
   );
 };
@@ -28,7 +29,7 @@ const ChatHeader = () => {
 const ChatBody: React.FC<{ messageList: Message[] }> = ({ messageList }) => {
   return (
     <div className="chat-body">
-      <ScrollToBottom.default className={"message-container"}>
+      <ScrollToBottom.default className={'message-container'}>
         {messageList.map((messageContent: Message) => {
           return (
             <div className="message">
@@ -49,23 +50,18 @@ const ChatBody: React.FC<{ messageList: Message[] }> = ({ messageList }) => {
   );
 };
 
-
-
 const sendMessage = async (
   socket: WebSocket,
   roomId: string,
   token: string,
-  message: string,
-  setMessageList: MAny,
-  setTextField: MAny
+  message: string
 ) => {
   const date = new Date();
   const time =
-    date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
 
   //send message to socket
-  setTextField("");
-  const data = { event: "send-to-ticker-room", token, message, roomId, time };
+  const data = { event: 'send-to-ticker-room', token, message, roomId, time };
   socket.send(JSON.stringify(data));
 
   //todo, add chat to DB
@@ -74,10 +70,12 @@ const sendMessage = async (
 const ChatFooter = ({ socket, ticker, token, setMessageList }) => {
   const roomId = ticker;
 
-  const [textField, setTextField] = useState<string>("");
+  const [textField, setTextField] = useState<string>('');
 
-  const sendThisMessage = () =>
-    sendMessage(socket, roomId, token, textField, setMessageList, setTextField);
+  const sendThisMessage = () => {
+    console.log(`[sendThisMessage]`);
+    sendMessage(socket, roomId, token, textField);
+  };
   return (
     <div className="chat-footer">
       <input
@@ -87,7 +85,7 @@ const ChatFooter = ({ socket, ticker, token, setMessageList }) => {
         onChange={(event) => {
           setTextField(event.target.value);
         }}
-        onKeyPress={async (event) => event.key === "Enter" && sendThisMessage()}
+        onKeyPress={async (event) => event.key === 'Enter' && sendThisMessage()}
       />
       <button onClick={sendThisMessage}>&#9658;</button>
     </div>
@@ -96,25 +94,38 @@ const ChatFooter = ({ socket, ticker, token, setMessageList }) => {
 
 const Chat: React.FC<ChatProps> = ({ socket, ticker, token }) => {
   const [messageList, setMessageList] = useState<Message[]>([]);
+
+  console.log(`Chat`);
   useEffect(() => {
+    console.log('Chat use effect []');
+    console.log(socket);
     const broadcastReceiver = async (event: MessageEvent) => {
-      const data = await event.data
-      console.log(`[Socket Message Received]`)
-      console.log(data)
-      if(data.event === "broadcast"){
-        console.log("broadcasting message")
-
+      const data = await event.data;
+      console.log(`[Socket Message Received]`);
+      console.log(data);
+      if (data.event === 'broadcast') {
+        console.log('broadcasting message');
+        try {
+          const message = data.message;
+          setMessageList((list) => {
+            return [...list, message];
+          });
+        } catch (err) {
+          console.log(`Chat UseEffect`);
+          console.log(err);
+        }
       }
-    }
-    socket &&
-      socket.addEventListener("message",broadcastReceiver);
+    };
+    socket && socket.addEventListener('message', broadcastReceiver);
 
-    return;
-  }, []);
+    return () => {
+      // socket.removeEventListener('message', broadcastReceiver);
+    };
+  }, [socket]);
 
   return (
     <div className="chat-window">
-      <ChatHeader />
+      <ChatHeader ticker={ticker} />
       <ChatBody messageList={messageList} />
       <ChatFooter
         socket={socket}
