@@ -49,20 +49,22 @@ const ChatBody: React.FC<{ messageList: Message[] }> = ({ messageList }) => {
   );
 };
 
+
+
 const sendMessage = async (
   socket: WebSocket,
   roomId: string,
   token: string,
   message: string,
   setMessageList: MAny,
-  setTextFied: MAny
+  setTextField: MAny
 ) => {
   const date = new Date();
   const time =
     date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 
   //send message to socket
-  setTextFied("");
+  setTextField("");
   const data = { event: "send-to-ticker-room", token, message, roomId, time };
   socket.send(JSON.stringify(data));
 
@@ -95,10 +97,17 @@ const ChatFooter = ({ socket, ticker, token, setMessageList }) => {
 const Chat: React.FC<ChatProps> = ({ socket, ticker, token }) => {
   const [messageList, setMessageList] = useState<Message[]>([]);
   useEffect(() => {
+    const broadcastReceiver = async (event: MessageEvent) => {
+      const data = await event.data
+      console.log(`[Socket Message Received]`)
+      console.log(data)
+      if(data.event === "broadcast"){
+        console.log("broadcasting message")
+
+      }
+    }
     socket &&
-      socket.on("receive_message", (data: MAny) => {
-        setMessageList((list: MAny) => [...list, data]);
-      });
+      socket.addEventListener("message",broadcastReceiver);
 
     return;
   }, []);
