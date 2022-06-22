@@ -95,18 +95,36 @@ const ChatFooter = ({ socket, ticker, token, setMessageList }) => {
 const Chat: React.FC<ChatProps> = ({ socket, ticker, token }) => {
   const [messageList, setMessageList] = useState<Message[]>([]);
 
+
+
   console.log(`Chat`);
+
+useEffect(()=>{
+
+},[])
+
   useEffect(() => {
+
     console.log('Chat use effect []');
     console.log(socket);
     const broadcastReceiver = async (event: MessageEvent) => {
+      console.log(event)
       const data = await event.data;
+      const blob = await data.text()
       console.log(`[Socket Message Received]`);
-      console.log(data);
-      if (data.event === 'broadcast') {
+      const obj = JSON.parse(blob);
+      const messages = obj.message
+      const name = obj.token
+      const time = obj.time
+
+    
+      if (obj.event === 'send-to-ticker-room') {
         console.log('broadcasting message');
         try {
-          const message = data.message;
+          const message = {
+            author: name,
+            message: messages,
+            time: time,}
           setMessageList((list) => {
             return [...list, message];
           });
