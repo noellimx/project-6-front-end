@@ -4,6 +4,7 @@ import * as ScrollToBottom from 'react-scroll-to-bottom';
 import './App.css';
 
 import { MAny } from '../utils/my-types';
+import axios from 'axios';
 
 // import { sendMessageToTickerRoom } from "./App";
 type ChatProps = {
@@ -99,9 +100,11 @@ const Chat: React.FC<ChatProps> = ({ socket, ticker, token }) => {
 
   console.log(`Chat`);
 
-useEffect(()=>{
-
-},[])
+  useEffect(()=>{
+  axios.get("https://localhost:8080/getChatHistory").then((res)=>{
+    console.log("axios, getchathistory", res)
+  })
+  })
 
   useEffect(() => {
 
@@ -109,6 +112,7 @@ useEffect(()=>{
     console.log(socket);
     const broadcastReceiver = async (event: MessageEvent) => {
       console.log(event)
+      //converting blob to string, then string to obj
       const data = await event.data;
       const blob = await data.text()
       console.log(`[Socket Message Received]`);
@@ -117,7 +121,7 @@ useEffect(()=>{
       const name = obj.token
       const time = obj.time
 
-    
+      //using obj instand of event
       if (obj.event === 'send-to-ticker-room') {
         console.log('broadcasting message');
         try {
