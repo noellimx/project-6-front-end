@@ -73,6 +73,7 @@ body {
 
 .chat-window .chat-body {
   height: calc(100% - (45px + 70px));
+  max-height: 550px;
   width: 100%;
   border: 1px solid #263238;
   background: #fff;
@@ -96,10 +97,11 @@ body {
 }
 
 .chat-window .chat-body .message .message-content {
-  width: auto;
+  min-width: 100px;
   height: auto;
   min-height: 40px;
-  max-width: 120px;
+  /* min-width: 80px; */
+  max-width: 300px;
   background-color: #43a047;
   border-radius: 5px;
   color: white;
@@ -205,4 +207,22 @@ body {
   display: flex;
   width: 20%;
   height: 100%;
+}
+
+.message-username{
+  font-size: 1vh;
+  color: #1b46f1;
+  font-weight: bold;
+}
+
+.message-time{
+  font-size: 0.8vh;
+  font-weight: bold;
+  color: #0b0b0c;
+  min-width: max-content;
+  text-align: right;
+}
+
+.message-content{
+  font-size: 1.5vh;
 }

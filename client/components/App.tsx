@@ -83,7 +83,7 @@ const App: React.FC<AppProps> = () => {
   );
 
   const [token, setToken] = React.useState<string>(getToken());
-
+console.log(token)
   React.useEffect(() => {
     const _socket =true ? new WebSocket("wss://localhost:8080/ws") : newMockWS("mockhost:65336");
     _socket.onopen = () => {

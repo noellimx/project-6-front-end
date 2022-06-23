@@ -2,9 +2,11 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import * as ScrollToBottom from 'react-scroll-to-bottom';
 import './App.css';
-
+import {Col, Row } from 'react-bootstrap'
 import { MAny } from '../utils/my-types';
 import axios from 'axios';
+import jwt_decode from 'jwt-decode'
+import moment from 'moment';
 
 // import { sendMessageToTickerRoom } from "./App";
 type ChatProps = {
@@ -19,6 +21,12 @@ type Message = {
   time: string;
 };
 
+type JwtDecode = {
+  username: string
+}
+
+
+
 const ChatHeader = ({ ticker }) => {
   return (
     <div className="chat-header">
@@ -28,6 +36,9 @@ const ChatHeader = ({ ticker }) => {
 };
 
 const ChatBody: React.FC<{ messageList: Message[] }> = ({ messageList }) => {
+
+
+  
   return (
     <div className="chat-body">
       <ScrollToBottom.default className={'message-container'}>
@@ -35,13 +46,20 @@ const ChatBody: React.FC<{ messageList: Message[] }> = ({ messageList }) => {
           return (
             <div className="message" key={`${messageContent.time}`}>
               <div>
-                <div className="message-content">
-                  <p>{messageContent.message}</p>
-                </div>
-              </div>
-              <div className="message-meta">
-                <p id="time">{messageContent.time}</p>
-                <p id="author">{messageContent.author}</p>
+                <Row className="message-content">
+                  <Col className='col-8'>
+                  <Row>
+                  <p className='message-username' id="author">{messageContent.author}</p>
+                  </Row>
+                  <Row>
+                  <p className='message-content'>{messageContent.message}</p>
+                  </Row>
+                  </Col>
+                  <Col className='col-4 message-time-col align-self-end'>
+                 <Row><p className='message-time' id="time">{moment(messageContent.time).format('LT')}</p>
+                  </Row>
+                  </Col>
+                </Row>
               </div>
             </div>
           );
@@ -57,9 +75,7 @@ const sendMessage = async (
   token: string,
   message: string
 ) => {
-  const date = new Date();
-  const time =
-    date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+  const time = moment();
 
   //send message to socket
   const data = { event: 'send-to-ticker-room', token, message, roomId, time };
@@ -69,6 +85,8 @@ const sendMessage = async (
 };
 
 const ChatFooter = ({ socket, ticker, token, setMessageList }) => {
+
+
   const roomId = ticker;
 
   const [textField, setTextField] = useState<string>('');
@@ -106,6 +124,7 @@ const Chat: React.FC<ChatProps> = ({ socket, ticker, token }) => {
     console.log("axios get chat all history")
     const result = res.data
     const allMessage = result.map((x)=>{
+
       const myMessage ={author: x.Username, message: x.Message, time: x.Time}
       return myMessage
     })
@@ -125,8 +144,10 @@ const Chat: React.FC<ChatProps> = ({ socket, ticker, token }) => {
       console.log(`[Socket Message Received]`);
       const obj = JSON.parse(blob);
       const messages = obj.message
-      const name = obj.token
+      const decodedJwt:JwtDecode = jwt_decode(obj.token);
+      const name = decodedJwt.username
       const time = obj.time
+      console.log(time)
 
       //using obj instand of event
       if (obj.event === 'send-to-ticker-room') {
