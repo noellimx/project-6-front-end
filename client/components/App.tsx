@@ -31,7 +31,7 @@ function getCookie(name) {
 }
 
 const getToken = () => {
-  return getCookie("Token") || "";
+  return getCookie("gm-token") || "";
 };
 
 const newMockWS = (address): MockWebSocket => {

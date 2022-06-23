@@ -9,16 +9,31 @@ import bindRoute from "./network/http.js";
 
 import config from "./config.js";
 
+const accessControlOrgin = "https://localhost:8080"
+
+
 const homePath = process.env[config.path_var.home];
 console.log(homePath);
 
 const SERVER_LISTENING_PORT = process.env.PORT || 3004;
 const app = express(); // framework
 
-app.use(cors({ origin: "*" }));
+function corsMiddleWare(){
+  return function(request, res, next){
+    res.setHeader('Access-Control-Allow-Origin', accessControlOrgin);
+
+    // res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept');
+    
+    // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+
+    next()
+  }
+}
+
+app.use(cors());
 app.use(express.static("dist"));
 app.use(cookieParser());
-
+app.use(corsMiddleWare())
 bindRoute(app);
 
 const keyFilePath = `${homePath}/customkeystore/production/server.key`;

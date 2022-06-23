@@ -33,7 +33,7 @@ const ChatBody: React.FC<{ messageList: Message[] }> = ({ messageList }) => {
       <ScrollToBottom.default className={'message-container'}>
         {messageList.map((messageContent: Message) => {
           return (
-            <div className="message">
+            <div className="message" key={`${messageContent.time}`}>
               <div>
                 <div className="message-content">
                   <p>{messageContent.message}</p>
@@ -101,10 +101,17 @@ const Chat: React.FC<ChatProps> = ({ socket, ticker, token }) => {
   console.log(`Chat`);
 
   useEffect(()=>{
-  axios.get("https://localhost:8080/getChatHistory").then((res)=>{
-    console.log("axios, getchathistory", res)
+    setMessageList([])
+    axios.get(`https://localhost:8080/history/${ticker}`).then((res)=>{
+    console.log("axios get chat all history")
+    const result = res.data
+    const allMessage = result.map((x)=>{
+      const myMessage ={author: x.Username, message: x.Message, time: x.Time}
+      return myMessage
+    })
+  setMessageList(allMessage)
   })
-  })
+  },[ticker])
 
   useEffect(() => {
 
@@ -141,9 +148,11 @@ const Chat: React.FC<ChatProps> = ({ socket, ticker, token }) => {
     socket && socket.addEventListener('message', broadcastReceiver);
 
     return () => {
-      // socket.removeEventListener('message', broadcastReceiver);
+      socket && socket.removeEventListener('message', broadcastReceiver);
     };
   }, [socket]);
+
+ 
 
   return (
     <div className="chat-window">

@@ -110,6 +110,7 @@ export default function SignIn() {
             >
               Sign In
             </Button>
+            <Link href="https://localhost:8080/auth/login/google" className="btn btn-primary">google</Link>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
