@@ -97,7 +97,7 @@ body {
 }
 
 .chat-window .chat-body .message .message-content {
-  min-width: 100px;
+  min-width: 50px;
   height: auto;
   min-height: 40px;
   /* min-width: 80px; */
@@ -225,4 +225,6 @@ body {
 
 .message-content{
   font-size: 1.5vh;
+  min-width: max-content;
+
 }
