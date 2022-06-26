@@ -39,6 +39,11 @@ file should be `client/config.js`
  - one to run webpack --watch `npm run client-build-dev`
 
 
+# Deployment
+
+Using Github Action (see workflow)
+
+
 ## Code Quality (Do)
 
 1. Run prettier with default configurations before pull request.
@@ -55,3 +60,4 @@ file should be `client/config.js`
 HAVE FUN
 2 terminals - one to run the server that serves the bundled js ```npm run start``` \
             - one to run webpack --watch ```npm run client-build-dev```
+
