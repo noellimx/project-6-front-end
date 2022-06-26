@@ -9,7 +9,7 @@ import bindRoute from "./network/http.js";
 
 import config from "./config.js";
 
-const accessControlOrgin = "https://localhost:8080"
+const accessControlOrgin = "https://localhost:8080" // Development always local
 
 
 const homePath = process.env[config.path_var.home];

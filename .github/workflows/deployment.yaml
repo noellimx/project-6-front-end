@@ -5,11 +5,10 @@ on:
   push:
     branches: 
       - deploy
-      - ci-cd
-
   pull_request:
     branches: 
       - deploy
+  types: [closed]
 jobs:
   deployment:
     strategy:

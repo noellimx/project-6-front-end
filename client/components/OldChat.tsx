@@ -8,6 +8,10 @@ import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import * as moment from 'moment';
 
+import config from "../config"
+
+
+const gomoonHttpsServer = config.httpsserver
 import { sendMessageToTickerRoom } from "./App";
 type ChatProps = {
   socket: MAny | WebSocket;
@@ -133,7 +137,7 @@ const Chat: React.FC<ChatProps> = ({ socket, ticker, token }) => {
     socket.send(JSON.stringify(data));
 
     setMessageList([]);
-    axios.get(`https://localhost:8080/history/${ticker}`).then((res) => {
+    axios.get(`https://${gomoonHttpsServer}/history/${ticker}`).then((res) => {
       console.log('axios get chat all history');
       const result = res.data;
       const allMessage = result.map((x) => {

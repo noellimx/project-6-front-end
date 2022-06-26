@@ -15,6 +15,9 @@ import Rss from "./Rss";
 
 import config from "../config";
 
+
+const wsServerAddressEndpoint = config.wsserver
+
 type MockWebSocket = {
   send: (_: string) => void;
   onopen: (fn: OnConnectionCallback) => void;
@@ -114,7 +117,7 @@ const App: React.FC<AppProps> = () => {
   const [token, setToken] = React.useState<string>(getToken());
 console.log(token)
   React.useEffect(() => {
-    const _socket =true ? new WebSocket("wss://localhost:8080/ws") : newMockWS("mockhost:65336");
+    const _socket =true ? new WebSocket(`wss://${wsServerAddressEndpoint}`) : newMockWS("mockhost:65336");
     _socket.onopen = () => {
       setSocket(_socket);
     };

@@ -13,6 +13,9 @@
 
 ## Dev Server Config
 
+Configuration defaults to production environment in the browser.
+
+
 template can be found at `server/config-template.js`
 file should be `server/config.js`
 

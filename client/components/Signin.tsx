@@ -13,6 +13,13 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+import config from "../config"
+
+
+const gomoonHttpsServer = config.httpsserver
+
+
+
 function Copyright(props: any) {
   return (
     <Typography
@@ -110,7 +117,7 @@ export default function SignIn() {
             >
               Sign In
             </Button>
-            <Link href="https://localhost:8080/auth/login/google" className="btn btn-primary">google</Link>
+            <Link href={`https://${gomoonHttpsServer}/auth/login/google`} className="btn btn-primary">google</Link>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
