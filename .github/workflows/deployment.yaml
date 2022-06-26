@@ -8,7 +8,7 @@ on:
   pull_request:
     branches: 
       - deploy
-  types: [closed]
+    types: [closed]
 jobs:
   deployment:
     strategy:
