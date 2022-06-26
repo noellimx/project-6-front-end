@@ -1,11 +1,8 @@
 // import Navbar from 'react-bootstrap/Navbar';
 import * as React from "react";
-import Navbar from "react-bootstrap/Navbar";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import InputGroup from "react-bootstrap/InputGroup";
-import Form from "react-bootstrap/Form";
+
+import {Button, Container, Nav, NavDropdown, Navbar, InputGroup, Form} from "react-bootstrap"
+
 
 import axios from "axios";
 
@@ -32,6 +29,11 @@ const loadMockMyFavourite = async (token) => {
     { symbol: "..", desc: "..." },
   ];
 };
+
+const removeToken=()=>{
+  document.cookie = 'gm-token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'
+  window.location.reload();
+}
 
 const loadServerMyFav = async () => {}; // TODO
 // const loadFavourite =
@@ -130,6 +132,7 @@ export default function MyNavbar({ setTicker }) {
               aria-describedby="basic-addon1"
             />
           </InputGroup>
+          <Button onClick={()=>{removeToken()}}>logout</Button>
         </Nav>
       </Container>
     </Navbar>
