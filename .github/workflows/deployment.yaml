@@ -33,7 +33,14 @@ jobs:
           npm i -legacy-peer-deps
           npm run client-build-prod
           ls dist
-
+      - name: copy file via ssh key
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.EC2_IP }}
+          key: ${{ secrets.SSH_KEY }}
+          username: ubuntu
+          source: "./dist"
+          target: "./dist"
 
       # - name: copy file into runner's home
       #   run: cp ./dev-hooks/deployment-hooks/deployec2gomoonbe.sh ./deployec2gomoonbe.sh
