@@ -47,6 +47,7 @@ file should be `client/config.js`
 1. PRs to be reviewed by at least 1 other member.
 
 
+
 2 terminals - one to run the server that serves the bundled js `npm run start` - one to run webpack --watch `npm run client-build-dev`
 HAVE FUN
 2 terminals - one to run the server that serves the bundled js ```npm run start``` \
