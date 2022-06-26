@@ -33,6 +33,7 @@ jobs:
           npm run client-build-prod
           ls dist
 
+
       # - name: copy file into runner's home
       #   run: cp ./dev-hooks/deployment-hooks/deployec2gomoonbe.sh ./deployec2gomoonbe.sh
       # - name: copy file via ssh key
