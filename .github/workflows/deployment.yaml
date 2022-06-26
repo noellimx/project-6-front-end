@@ -40,7 +40,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           username: ubuntu
           source: "./dist"
-          target: "./dist"
+          target: "./"
 
       # - name: copy file into runner's home
       #   run: cp ./dev-hooks/deployment-hooks/deployec2gomoonbe.sh ./deployec2gomoonbe.sh
