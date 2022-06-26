@@ -6,9 +6,8 @@ import {Col, Row } from 'react-bootstrap'
 import { MAny } from '../utils/my-types';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode'
-import moment from 'moment';
+import moment from 'moment'
 
-// import { sendMessageToTickerRoom } from "./App";
 type ChatProps = {
   socket: MAny | WebSocket;
   ticker: string;
@@ -30,7 +29,7 @@ type JwtDecode = {
 const ChatHeader = ({ ticker }) => {
   return (
     <div className="chat-header">
-      <p>A Live Chat {`${ticker}`}</p>
+      <p>Live Chat {`${ticker}`}</p>
     </div>
   );
 };
@@ -73,18 +72,20 @@ const sendMessage = async (
   socket: WebSocket,
   roomId: string,
   token: string,
-  message: string
+  message: string,
+  username: string
 ) => {
   const time = moment();
+ 
 
   //send message to socket
-  const data = { event: 'send-to-ticker-room', token, message, roomId, time };
+  const data = { event: 'send-to-ticker-room', token, message, roomId, time, username };
   socket.send(JSON.stringify(data));
 
   //todo, add chat to DB
 };
 
-const ChatFooter = ({ socket, ticker, token, setMessageList }) => {
+const ChatFooter = ({ socket, ticker, token }) => {
 
 
   const roomId = ticker;
@@ -93,7 +94,10 @@ const ChatFooter = ({ socket, ticker, token, setMessageList }) => {
 
   const sendThisMessage = () => {
     console.log(`[sendThisMessage]`);
-    sendMessage(socket, roomId, token, textField);
+    const decodedJwt:JwtDecode = jwt_decode(token);
+    const name = decodedJwt.username
+    console.log('getting username from sendThisMessage', name)
+    sendMessage(socket, roomId, token, textField, name);
   };
   return (
     <div className="chat-footer">
@@ -118,7 +122,14 @@ const Chat: React.FC<ChatProps> = ({ socket, ticker, token }) => {
 
   console.log(`Chat`);
 
+  
+
   useEffect(()=>{
+
+    const data = { event: 'subsribe-to-ticker-room', token, roomId: ticker};
+    console.log("sending to socket with event subsribe-to-ticker", data)
+    socket.send(JSON.stringify(data));
+
     setMessageList([])
     axios.get(`https://localhost:8080/history/${ticker}`).then((res)=>{
     console.log("axios get chat all history")
@@ -128,14 +139,17 @@ const Chat: React.FC<ChatProps> = ({ socket, ticker, token }) => {
       const myMessage ={author: x.Username, message: x.Message, time: x.Time}
       return myMessage
     })
-  setMessageList(allMessage)
-  })
+    setMessageList(allMessage)
+
+    })
   },[ticker])
+
 
   useEffect(() => {
 
     console.log('Chat use effect []');
     console.log(socket);
+    
     const broadcastReceiver = async (event: MessageEvent) => {
       console.log(event)
       //converting blob to string, then string to obj
@@ -144,28 +158,31 @@ const Chat: React.FC<ChatProps> = ({ socket, ticker, token }) => {
       console.log(`[Socket Message Received]`);
       const obj = JSON.parse(blob);
       const messages = obj.message
+      console.log("this is the messaage rec", data)
       const decodedJwt:JwtDecode = jwt_decode(obj.token);
       const name = decodedJwt.username
       const time = obj.time
-      console.log(time)
+
 
       //using obj instand of event
       if (obj.event === 'send-to-ticker-room') {
-        console.log('broadcasting message');
-        try {
-          const message = {
-            author: name,
-            message: messages,
-            time: time,}
-          setMessageList((list) => {
-            return [...list, message];
-          });
-        } catch (err) {
-          console.log(`Chat UseEffect`);
-          console.log(err);
-        }
+          console.log('broadcasting to specific room');
+          try {
+            const message = {
+              author: name,
+              message: messages,
+              time: time,}
+            setMessageList((list) => {
+              return [...list, message];
+            });
+          } catch (err) {
+            console.log(`Chat UseEffect`);
+            console.log(err);
+          }
       }
     };
+
+
     socket && socket.addEventListener('message', broadcastReceiver);
 
     return () => {
@@ -183,7 +200,6 @@ const Chat: React.FC<ChatProps> = ({ socket, ticker, token }) => {
         socket={socket}
         ticker={ticker}
         token={token}
-        setMessageList={setMessageList}
       />
     </div>
   );

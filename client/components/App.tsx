@@ -77,7 +77,6 @@ const TradingViewWidget = TVW.default;
 
 const App: React.FC<AppProps> = () => {
   const [ticker, setTicker] = React.useState<string>("NASDAQ:AAPL");
-
   const [socket, setSocket] = React.useState<WebSocket | MockWebSocket | null>(
     null
   );
@@ -105,8 +104,7 @@ console.log(token)
               hide_side_toolbar={false}
               allow_symbol_change={false}
             />
-
-            <OldChat token={token} ticker={ticker} socket={socket} />
+            {socket && <OldChat token={token} ticker={ticker} socket={socket} /> }
             {/* <div className="div-element2">
               <Rss />
             </div> */}
