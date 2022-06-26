@@ -5,6 +5,7 @@ import "./App.css";
 
 import { MAny } from "../utils/my-types";
 
+import { sendMessageToTickerRoom } from "./App";
 type ChatProps = {
   socket: MAny | WebSocket;
   ticker: string;
@@ -56,7 +57,7 @@ const sendMessage = async (
   message: string
 ) => {
   const data = { token, message, roomId };
-  socket.send(JSON.stringify(data));
+  sendMessageToTickerRoom(socket, data);
 };
 
 const ChatFooter = ({ socket, ticker, token }) => {
@@ -64,7 +65,12 @@ const ChatFooter = ({ socket, ticker, token }) => {
 
   const [textField, setTextField] = useState<string>("");
 
-  const sendThisMessage = () => sendMessage(socket, roomId, token, textField);
+  const sendThisMessage = () => {
+    console.log(`[sendThisMessage]`)
+    sendMessage(socket, roomId, token, textField)
+
+
+  };
   return (
     <div className="chat-footer">
       <input
