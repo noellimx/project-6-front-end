@@ -29,6 +29,5 @@ PAINT(
   rootHTMLElement,
   <div>
     <App />
-    
   </div>
 );
