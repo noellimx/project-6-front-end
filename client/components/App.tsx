@@ -9,22 +9,25 @@ import { Grid } from "@mui/material";
 
 import MyNavbar from "./Navbar";
 import * as TVW from "react-tradingview-widget";
-import Oldchat from "./OldChat";
+import OldChat from "./OldChat";
 import Signin from "./Signin";
 import Rss from "./Rss";
 
 import config from "../config";
 
+
+const wsServerAddressEndpoint = config.wsserver
+
 type MockWebSocket = {
   send: (_: string) => void;
-  onopen: (fn: onopenionCallback) => void;
+  onopen: (fn: OnConnectionCallback) => void;
 };
 
 const foo = (): void => {}; // return void
 const bar = (): null => null; // return null
 const baz = (): undefined => undefined; // return defined
 
-type onopenionCallback = () => void;
+type OnConnectionCallback = () => void;
 
 type SendMessageToTickerRoom = (
   s: WebSocket | MockWebSocket,
@@ -54,7 +57,7 @@ function getCookie(name) {
 }
 
 const getToken = () => {
-  return getCookie("Token") || "";
+  return getCookie("gm-token") || "";
 };
 
 const newMockWS = (address): MockWebSocket => {
@@ -83,9 +86,20 @@ const newMockWS = (address): MockWebSocket => {
   };
 
   return {
-    send,
+    send: async (data: string) => {
+      if (isConnected) {
+        console.log(
+          `[MOCK] data to be sent : ${data} <NO DATA IS ACTUALLY SENT`
+        );
+      } else {
+        new Error(
+          `Although this is a mock, a mock connection should be established before sending data`
+        );
+      }
+    },
 
-    onopen,
+    onopen: (cb) => {
+    },
   };
 };
 
@@ -96,31 +110,17 @@ const TradingViewWidget = TVW.default;
 
 const App: React.FC<AppProps> = () => {
   const [ticker, setTicker] = React.useState<string>("NASDAQ:AAPL");
-
   const [socket, setSocket] = React.useState<WebSocket | MockWebSocket | null>(
     null
   );
 
   const [token, setToken] = React.useState<string>(getToken());
-
+console.log(token)
   React.useEffect(() => {
-    const _socket =
-      config.env === "production"
-        ? new WebSocket("wss://" + config.wsserver)
-        : newMockWS("wss://mockhost:65336");
-    // const _socket = config.env === "production" ? new WebSocket(config.wsserver) : config.env === "test" ?  newMockWS("mockhost:65336") : null);
-
-    if (_socket === null) {
-      throw new Error(
-        `Socket inialization does not support environment ${config.env}`
-      );
-    } else {
-      _socket.onopen = () => {
-        setSocket(_socket);
-      };
-    }
-
-    return () => {};
+    const _socket =true ? new WebSocket(`wss://${wsServerAddressEndpoint}`) : newMockWS("mockhost:65336");
+    _socket.onopen = () => {
+      setSocket(_socket);
+    };
   }, []);
 
   return (
@@ -129,25 +129,19 @@ const App: React.FC<AppProps> = () => {
         <Signin />
       ) : (
         <>
-        
           <MyNavbar setTicker={setTicker} />
           <div className="div-container">
-          
-          <TradingViewWidget
-            symbol={ticker}
-            theme="Dark"
-            hide_side_toolbar={false}
-            allow_symbol_change={false}
-
+            <TradingViewWidget
+              symbol={ticker}
+              theme="Dark"
+              hide_side_toolbar={false}
+              allow_symbol_change={false}
             />
-            
-          
-              <Oldchat token={token} ticker={ticker} socket={socket}/> 
-          
-          <div className ="div-element2">
-          <Rss/>    
+            {socket && <OldChat token={token} ticker={ticker} socket={socket} /> }
+            {/* <div className="div-element2">
+              <Rss />
+            </div> */}
           </div>
-          </div>  
         </>
       )}
     </>
