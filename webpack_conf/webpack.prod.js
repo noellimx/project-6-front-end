@@ -8,12 +8,12 @@ import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 export default merge(common, {
-  mode: "production",
+  mode: "development",
+  devtool: "inline-source-map",
   plugins: [
     new HtmlWebpackPlugin({
       cache: false,
       filename: "main.html",
-      inject: true,
       template: path.resolve(__dirname, "..", "client", "main.html"),
     }),
   ],
