@@ -28,6 +28,7 @@ jobs:
           node-version: 18
       - name: build dist and deposit into server
         run: |
+          ls
           rm -rf node_modules
           npm ci -legacy-peer-deps
           npm run client-build-prod
