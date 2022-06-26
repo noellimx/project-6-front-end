@@ -136,8 +136,9 @@ const Chat: React.FC<ChatProps> = ({ socket, ticker, token }) => {
       console.log('axios get chat all history');
       const result = res.data;
       const allMessage = result.map((x) => {
+        const email = x.Username.split("@")
         const myMessage = {
-          author: x.Username,
+          author: email[0],
           message: x.Message,
           time: x.Time,
         };
@@ -171,6 +172,7 @@ const Chat: React.FC<ChatProps> = ({ socket, ticker, token }) => {
 
         const name = obj.Message.Username;
         const time = obj.Message.Time;
+        const email = name.split("@")
 
         // console.log("this is data", data)
         // var myobj = JSON.parse(data)
@@ -187,7 +189,7 @@ const Chat: React.FC<ChatProps> = ({ socket, ticker, token }) => {
           console.log('broadcasting to specific room');
           try {
             const message = {
-              author: name,
+              author: email[0],
               message: messages,
               time: time,
             };
