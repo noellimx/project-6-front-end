@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "outDir": "./dist/",
-    "noImplicitAny": true,
     "module": "es6",
     "target": "es5",
     "jsx": "react",
@@ -11,6 +10,7 @@
   },
   "include": [
     "client/components/types/svg.d.ts",
-    "client/components/types/haversine-offset.d.ts"
+    "client/components/types/haversine-offset.d.ts",
+    "client/components/types/react-tradingview-widget.d.ts"
   ]
 }

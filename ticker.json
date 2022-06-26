@@ -1,0 +1,506 @@
+[
+  {
+    "symbol": "BTCUSDT",
+    "description": "Bitcoin / TetherUS",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCBTC",
+    "provider_id": "binance"
+  },
+  {
+    "symbol": "BTCUSD",
+    "description": "Bitcoin / U.S. dollar",
+    "type": "crypto",
+    "exchange": "BITSTAMP",
+    "currency_code": "USD",
+    "currency-logoid": "country/US",
+    "base-currency-logoid": "crypto/XTVCBTC",
+    "provider_id": "bitstamp"
+  },
+  {
+    "symbol": "ETHUSDT",
+    "description": "Ethereum / TetherUS",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCETH",
+    "provider_id": "binance"
+  },
+  {
+    "symbol": "BTCUSDTPERP",
+    "description": "Bitcoin / TetherUS PERPETUAL FUTURES",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCBTC",
+    "provider_id": "binance"
+  },
+  {
+    "symbol": "BTCUSD",
+    "description": "BTC/USD",
+    "type": "crypto",
+    "exchange": "COINBASE",
+    "currency_code": "USD",
+    "currency-logoid": "country/US",
+    "base-currency-logoid": "crypto/XTVCBTC",
+    "provider_id": "coinbase"
+  },
+  {
+    "symbol": "BTCUSDT",
+    "description": "BTCUSDT Perpetual Contract",
+    "type": "crypto",
+    "exchange": "BYBIT",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCBTC",
+    "provider_id": "bybit"
+  },
+  {
+    "symbol": "ETHUSD",
+    "description": "Ethereum / U.S. dollar",
+    "type": "crypto",
+    "exchange": "BITSTAMP",
+    "currency_code": "USD",
+    "currency-logoid": "country/US",
+    "base-currency-logoid": "crypto/XTVCETH",
+    "provider_id": "bitstamp"
+  },
+  {
+    "symbol": "SOLUSDT",
+    "description": "SOL / TetherUS",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCSOL",
+    "provider_id": "binance"
+  },
+  {
+    "symbol": "ETHUSD",
+    "description": "ETH/USD",
+    "type": "crypto",
+    "exchange": "COINBASE",
+    "currency_code": "USD",
+    "currency-logoid": "country/US",
+    "base-currency-logoid": "crypto/XTVCETH",
+    "provider_id": "coinbase"
+  },
+  {
+    "symbol": "ADAUSDT",
+    "description": "Cardano / TetherUS",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCADA",
+    "provider_id": "binance"
+  },
+  {
+    "symbol": "BTCUSD",
+    "description": "Bitcoin all time history index",
+    "type": "crypto",
+    "exchange": "INDEX",
+    "currency_code": "USD",
+    "currency-logoid": "country/US",
+    "base-currency-logoid": "crypto/XTVCBTC",
+    "provider_id": "tvc",
+    "typespecs": ["synthetic"]
+  },
+  {
+    "symbol": "BTCUSD",
+    "description": "BTCUSD Perpetual Contract",
+    "type": "crypto",
+    "exchange": "BYBIT",
+    "currency_code": "USD",
+    "currency-logoid": "country/US",
+    "base-currency-logoid": "crypto/XTVCBTC",
+    "provider_id": "bybit"
+  },
+  {
+    "symbol": "ETHUSDTPERP",
+    "description": "Ethereum / TetherUS PERPETUAL FUTURES",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCETH",
+    "provider_id": "binance"
+  },
+  {
+    "symbol": "BTCUSD",
+    "description": "Bitcoin / Dollar",
+    "type": "crypto",
+    "exchange": "BITFINEX",
+    "currency_code": "USD",
+    "currency-logoid": "country/US",
+    "base-currency-logoid": "crypto/XTVCBTC",
+    "provider_id": "bitfinex"
+  },
+  {
+    "symbol": "TRXUSDT",
+    "description": "TRON / TetherUS",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCTRX",
+    "provider_id": "binance"
+  },
+  {
+    "symbol": "BTCUSDT",
+    "description": "Bitcoin / Tether",
+    "type": "crypto",
+    "exchange": "KUCOIN",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCBTC",
+    "provider_id": "kucoin"
+  },
+  {
+    "symbol": "BNBUSDT",
+    "description": "Binance Coin / TetherUS",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCBNB",
+    "provider_id": "binance"
+  },
+  {
+    "symbol": "AVAXUSDT",
+    "description": "AVAX / TetherUS",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCAVAX",
+    "provider_id": "binance",
+    "typespecs": ["defi"]
+  },
+  {
+    "symbol": "DOTUSDT",
+    "description": "DOT / TetherUS",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCDOT",
+    "provider_id": "binance"
+  },
+  {
+    "symbol": "XRPUSDT",
+    "description": "XRP / TetherUS",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCXRP",
+    "provider_id": "binance"
+  },
+  {
+    "symbol": "LINKUSDT",
+    "description": "ChainLink / TetherUS",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCLINK",
+    "provider_id": "binance",
+    "typespecs": ["defi"]
+  },
+  {
+    "symbol": "BTCPERP",
+    "description": "BTC Perpetual Futures Contract",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USD",
+    "currency-logoid": "country/US",
+    "base-currency-logoid": "crypto/XTVCBTC",
+    "provider_id": "binance"
+  },
+  {
+    "symbol": "BTCUSD",
+    "description": "Bitcoin / US Dollar (calculated by TradingView)",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USD",
+    "currency-logoid": "country/US",
+    "base-currency-logoid": "crypto/XTVCBTC",
+    "provider_id": "binance",
+    "typespecs": ["synthetic"]
+  },
+  {
+    "symbol": "FTMUSDT",
+    "description": "Fantom / TetherUS",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCFTM",
+    "provider_id": "binance",
+    "typespecs": ["defi"]
+  },
+  {
+    "symbol": "SHIBUSDT",
+    "description": "SHIB / TetherUS",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCSHIB",
+    "provider_id": "binance"
+  },
+  {
+    "symbol": "ETHUSDT",
+    "description": "ETHUSDT Perpetual Contract",
+    "type": "crypto",
+    "exchange": "BYBIT",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCETH",
+    "provider_id": "bybit"
+  },
+  {
+    "symbol": "BTCPERP",
+    "description": "Bitcoin Perpetual Futures",
+    "type": "crypto",
+    "exchange": "FTX",
+    "currency_code": "USD",
+    "currency-logoid": "country/US",
+    "base-currency-logoid": "crypto/XTVCBTC",
+    "provider_id": "ftx"
+  },
+  {
+    "symbol": "DOGEUSDT",
+    "description": "Dogecoin / TetherUS",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCDOGE",
+    "provider_id": "binance"
+  },
+  {
+    "symbol": "BTCBUSD",
+    "description": "Bitcoin / Binance USD",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "BUSD",
+    "currency-logoid": "crypto/XTVCBUSD",
+    "base-currency-logoid": "crypto/XTVCBTC",
+    "provider_id": "binance"
+  },
+  {
+    "symbol": "NEARUSDT",
+    "description": "NEAR / TetherUS",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCNEAR",
+    "provider_id": "binance"
+  },
+  {
+    "symbol": "GMTUSDT",
+    "description": "GMT / TetherUS",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCGMTSTEPN",
+    "provider_id": "binance"
+  },
+  {
+    "symbol": "MATICUSDT",
+    "description": "MATIC Network / TetherUS",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCMATIC",
+    "provider_id": "binance"
+  },
+  {
+    "symbol": "ATOMUSDT",
+    "description": "Cosmos / TetherUS",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCATOM",
+    "provider_id": "binance"
+  },
+  {
+    "symbol": "SOLUSDTPERP",
+    "description": "SOL / TetherUS PERPETUAL FUTURES",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCSOL",
+    "provider_id": "binance"
+  },
+  {
+    "symbol": "SOLUSD",
+    "description": "Solana / USD",
+    "type": "crypto",
+    "exchange": "FTX",
+    "currency_code": "USD",
+    "currency-logoid": "country/US",
+    "base-currency-logoid": "crypto/XTVCSOL",
+    "provider_id": "ftx"
+  },
+  {
+    "symbol": "GALAUSDT",
+    "description": "GALA / TetherUS",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCGALA",
+    "provider_id": "binance"
+  },
+  {
+    "symbol": "MANAUSDT",
+    "description": "Decentraland / TetherUS",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCMANA",
+    "provider_id": "binance"
+  },
+  {
+    "symbol": "APEUSDT",
+    "description": "APE / TetherUS",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCAPEAPECOIN",
+    "provider_id": "binance"
+  },
+  {
+    "symbol": "ETHBTC",
+    "description": "Ethereum / Bitcoin",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "BTC",
+    "currency-logoid": "crypto/XTVCBTC",
+    "base-currency-logoid": "crypto/XTVCETH",
+    "provider_id": "binance"
+  },
+  {
+    "symbol": "XBTUSD",
+    "description": "Bitcoin / US Dollar Perpetual Inverse Swap Contract",
+    "type": "crypto",
+    "exchange": "BITMEX",
+    "currency_code": "USD",
+    "currency-logoid": "country/US",
+    "base-currency-logoid": "crypto/XTVCBTC",
+    "provider_id": "bitmex"
+  },
+  {
+    "symbol": "WAVESUSDT",
+    "description": "Waves / TetherUS",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCWAVES",
+    "provider_id": "binance"
+  },
+  {
+    "symbol": "SANDUSDT",
+    "description": "SAND / TetherUS",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCSAND",
+    "provider_id": "binance"
+  },
+  {
+    "symbol": "EGLDUSDT",
+    "description": "EGLD / TetherUS",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCEGLD",
+    "provider_id": "binance"
+  },
+  {
+    "symbol": "PEOPLEUSDTPERP",
+    "description": "PEOPLE / TetherUS PERPETUAL FUTURES",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "provider_id": "binance"
+  },
+  {
+    "symbol": "ETHUSD",
+    "description": "Ethereum / US Dollar (calculated by TradingView)",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USD",
+    "currency-logoid": "country/US",
+    "base-currency-logoid": "crypto/XTVCETH",
+    "provider_id": "binance",
+    "typespecs": ["synthetic"]
+  },
+  {
+    "symbol": "ADAUSDTPERP",
+    "description": "Cardano / TetherUS PERPETUAL FUTURES",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCADA",
+    "provider_id": "binance"
+  },
+  {
+    "symbol": "PEOPLEUSDT",
+    "description": "PEOPLE / TetherUS",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "provider_id": "binance"
+  },
+  {
+    "symbol": "XRPUSD",
+    "description": "XRP / U.S. dollar",
+    "type": "crypto",
+    "exchange": "BITSTAMP",
+    "currency_code": "USD",
+    "currency-logoid": "country/US",
+    "base-currency-logoid": "crypto/XTVCXRP",
+    "provider_id": "bitstamp"
+  },
+  {
+    "symbol": "TRXUSDTPERP",
+    "description": "TRON / TetherUS PERPETUAL FUTURES",
+    "type": "crypto",
+    "exchange": "BINANCE",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCTRX",
+    "provider_id": "binance"
+  },
+  {
+    "symbol": "ETHUSDT",
+    "description": "Ethereum / Tether",
+    "type": "crypto",
+    "exchange": "KUCOIN",
+    "currency_code": "USDT",
+    "currency-logoid": "crypto/XTVCUSDT",
+    "base-currency-logoid": "crypto/XTVCETH",
+    "provider_id": "kucoin"
+  }
+]
