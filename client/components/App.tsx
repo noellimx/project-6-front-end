@@ -24,7 +24,7 @@ const foo = (): void => {}; // return void
 const bar = (): null => null; // return null
 const baz = (): undefined => undefined; // return defined
 
-type onopenionCallback = () => void;
+type OnConnectionCallback = () => void;
 
 type SendMessageToTickerRoom = (
   s: WebSocket | MockWebSocket,
@@ -96,7 +96,6 @@ const newMockWS = (address): MockWebSocket => {
     },
 
     onopen: (cb) => {
-      onConnectionFnList.push(cb);
     },
   };
 };

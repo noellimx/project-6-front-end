@@ -6,7 +6,7 @@ import { Col, Row } from 'react-bootstrap';
 import { MAny } from '../utils/my-types';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
-import moment from 'moment';
+import * as moment from 'moment';
 
 import { sendMessageToTickerRoom } from "./App";
 type ChatProps = {
