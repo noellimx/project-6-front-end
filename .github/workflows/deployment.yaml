@@ -28,10 +28,10 @@ jobs:
           node-version: 18
       - name: build dist and deposit into server
         run: |
-        rm -rf node_modules
-        npm i -legacy-peer-deps
-        npm run client-build-prod
-        ls dist
+          rm -rf node_modules
+          npm i -legacy-peer-deps
+          npm run client-build-prod
+          ls dist
 
       # - name: copy file into runner's home
       #   run: cp ./dev-hooks/deployment-hooks/deployec2gomoonbe.sh ./deployec2gomoonbe.sh
