@@ -37,26 +37,12 @@ jobs:
           source: "./dist"
           target: "./"
 
-      # - name: copy file into runner's home
-      #   run: cp ./dev-hooks/deployment-hooks/deployec2gomoonbe.sh ./deployec2gomoonbe.sh
-      # - name: copy file via ssh key
-      #   uses: appleboy/scp-action@master
-      #   with:
-      #     host: ${{ secrets.EC2_IP }}
-      #     key: ${{ secrets.SSH_KEY }}
-      #     username: ubuntu
-      #     source: "./deployec2gomoonbe.sh"
-      #     target: "./"
-      # - name: executing remote ssh commands using ssh key
-      #   uses: appleboy/ssh-action@master
-      #   env:
-      #     SHA: ${{ github.sha }}
-      #   with:
-      #     host: ${{ secrets.EC2_IP }}
-      #     username: ubuntu
-      #     key: ${{ secrets.SSH_KEY }}
-      #     port: 22
-      #     envs: SHA
-      #     script: |
-      #       echo "$SHA"
-      #       ./deployec2gomoonbe.sh "$SHA"
+
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_IP }}
+          username: ubuntu
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          script: cp ./dist/main.html ./dist/index.html
