@@ -204,6 +204,11 @@ body {
 
 }
 
+.searchbar-navbar{
+  min-width: 300px;
+}
+
+
 .p6c{
   height: 100%;
   width: 100%;
