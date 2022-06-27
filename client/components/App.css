@@ -1,5 +1,5 @@
 .App {
-  background: #fff;
+  background: rgb(209, 93, 93);
   color: #212121;
   font-family: "Open Sans", sans-serif;
   display: grid;
@@ -40,7 +40,7 @@ body {
   padding: 5px;
   font-size: 16px;
   background: #43a047;
-  color: #fff;
+  color: #181c27;
   cursor: pointer;
 }
 
@@ -50,7 +50,7 @@ body {
 
 .chat-window {
   width: 300px;
-  height: auto;
+  height: 640px;
 }
 
 .chat-window p {
@@ -59,7 +59,7 @@ body {
 .chat-window .chat-header {
   height: 45px;
   border-radius: 6px;
-  background: #263238;
+  background: #181c27;
   position: relative;
   cursor: pointer;
 }
@@ -67,7 +67,6 @@ body {
   display: block;
   padding: 0 1em 0 2em;
   color: #fff;
-  font-weight: 700;
   line-height: 45px;
 }
 
@@ -75,8 +74,8 @@ body {
   height: calc(100% - (45px + 70px));
   max-height: 550px;
   width: 100%;
-  border: 1px solid #263238;
-  background: rgb(84, 82, 82);
+  border: 1px solid #030304;
+  background: #181c27;
 
   position: relative;
 }
@@ -102,7 +101,7 @@ body {
   min-height: 40px;
   /* min-width: 80px; */
   max-width: 300px;
-  background-color: #43a047;
+  background-color: #763b8f;
   border-radius: 5px;
   color: white;
   display: flex;
@@ -154,7 +153,7 @@ body {
 
 .chat-window .chat-footer {
   height: 40px;
-  border: 1px solid #263238;
+  border: 1px solid #0d1012;
   border-top: none;
   display: flex;
 }
@@ -163,10 +162,10 @@ body {
   height: 100%;
   flex: 85%;
   border: 0;
-  padding: 0 0.7em;
+  
   font-size: 1em;
   border-right: 1px dotted #607d8b;
-
+  background: #181c27;
   outline: none;
   font-family: "Open Sans", sans-serif;
 }
@@ -178,14 +177,14 @@ body {
   cursor: pointer;
   flex: 15%;
   height: 100%;
-  background: transparent;  
+  background: #181c27;  
   outline: none;  
   font-size: 25px;  
-  color: lightgray; 
+  color: rgb(18, 216, 84); 
 }
 
 .chat-window .chat-footer button:hover {
-  color: #43a047;
+  color: #79116f;
 }
 .hide {
   opacity: 0 !important;
@@ -210,9 +209,9 @@ body {
 }
 
 .message-username{
-  font-size: 1vh;
-  color: #1b46f1;
-  font-weight: bold;
+  font-size: 1.2vh;
+  color: #1bf17f;
+
 }
 
 .message-time{

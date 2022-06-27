@@ -30,7 +30,7 @@ function Copyright(props: any) {
     >
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        TTM
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -85,7 +85,7 @@ export default function SignIn() {
             noValidate
             sx={{ mt: 1 }}
           >
-            <TextField
+            {/* <TextField
               margin="normal"
               required
               fullWidth
@@ -116,17 +116,20 @@ export default function SignIn() {
               sx={{ mt: 3, mb: 2 }}
             >
               Sign In
-            </Button>
-            <Link href={`https://${gomoonHttpsServer}/auth/login/google`} className="btn btn-primary">google</Link>
+            </Button> */}
+            <Button  type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }} href={`https://${gomoonHttpsServer}/auth/login/google`} className="btn btn-primary">Google Authentication</Button>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
-                  Forgot password?
+                  Forgot password? 
                 </Link>
               </Grid>
               <Grid item>
                 <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                  {" Don't have an account? Sign Up "}
                 </Link>
               </Grid>
             </Grid>
