@@ -104,6 +104,7 @@ const ChatFooter = ({ socket, ticker, token }) => {
   const [textField, setTextField] = useState<string>('');
 
   const sendThisMessage = () => {
+    setTextField("")
     console.log(`[sendThisMessage]`);
     const decodedJwt: JwtDecode = jwt_decode(token);
     const name = decodedJwt.username;
