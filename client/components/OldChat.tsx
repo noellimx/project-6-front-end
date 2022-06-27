@@ -8,11 +8,14 @@ import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import * as moment from 'moment';
 
-import config from "../config"
+import config from '../config';
 
+const gomoonHttpsServer = config.httpsserver;
+type Favourite = {
+  value: string;
+  description: string;
+};
 
-const gomoonHttpsServer = config.httpsserver
-import { sendMessageToTickerRoom } from "./App";
 type ChatProps = {
   socket: MAny | WebSocket;
   ticker: string;
@@ -28,6 +31,11 @@ type Message = {
 type JwtDecode = {
   username: string;
 };
+
+function addTickerToFav(ticker, token) {
+  console.log('addticker to fav ticker and token', ticker, token);
+  axios.get(`/favorite/addtickertofavourite/${ticker}/${token}`);
+}
 
 const ChatHeader = ({ ticker }) => {
   return (
@@ -104,7 +112,7 @@ const ChatFooter = ({ socket, ticker, token }) => {
   const [textField, setTextField] = useState<string>('');
 
   const sendThisMessage = () => {
-    setTextField("")
+    setTextField('');
     console.log(`[sendThisMessage]`);
     const decodedJwt: JwtDecode = jwt_decode(token);
     const name = decodedJwt.username;
@@ -122,6 +130,7 @@ const ChatFooter = ({ socket, ticker, token }) => {
         }}
         onKeyPress={async (event) => event.key === 'Enter' && sendThisMessage()}
       />
+      <p onClick={() => addTickerToFav(ticker, token)}>Like</p>
       <button onClick={sendThisMessage}>&#9658;</button>
     </div>
   );
@@ -129,6 +138,7 @@ const ChatFooter = ({ socket, ticker, token }) => {
 
 const Chat: React.FC<ChatProps> = ({ socket, ticker, token }) => {
   const [messageList, setMessageList] = useState<Message[]>([]);
+  const [favouriteList, setFavourList] = useState<Favourite[]>([]);
 
   console.log(`Chat`);
 
@@ -142,7 +152,7 @@ const Chat: React.FC<ChatProps> = ({ socket, ticker, token }) => {
       console.log('axios get chat all history');
       const result = res.data;
       const allMessage = result.map((x) => {
-        const email = x.Username.split("@")
+        const email = x.Username.split('@');
         const myMessage = {
           author: email[0],
           message: x.Message,
@@ -151,6 +161,23 @@ const Chat: React.FC<ChatProps> = ({ socket, ticker, token }) => {
         return myMessage;
       });
       setMessageList(allMessage);
+
+      axios
+        .get(`https://${gomoonHttpsServer}/favourite/getuserfavourite/${token}`)
+        .then((res) => {
+          console.log('axiso get user favourite ticker');
+          const result = res.data;
+          const allFavourite = result.map((x) => {
+            const value = x.value;
+            const description = x.description;
+            const myFavourite = {
+              value,
+              description,
+            };
+            return myFavourite;
+          });
+          setFavourList(allFavourite);
+        });
     });
   }, [ticker]);
 
@@ -165,30 +192,14 @@ const Chat: React.FC<ChatProps> = ({ socket, ticker, token }) => {
         console.log(`[Socket Message Received]`);
         //converting blob to string, then string to obj
         const data = await event.data;
-        console.log('this is data', data);
-        console.log('this is data type', typeof data);
         const blob = await data.text();
-        console.log("this is blob", blob)
         const obj = JSON.parse(blob);
-        console.log('this is data.message', obj.Message);
-        console.log(obj.Message.Message)
-        console.log(obj.Event)
 
         const messages = obj.Message.Message;
 
         const name = obj.Message.Username;
         const time = obj.Message.Time;
-        const email = name.split("@")
-
-        // console.log("this is data", data)
-        // var myobj = JSON.parse(data)
-        // console.log("converted to object", myobj.message)
-        // console.log(`[Socket Message Received]`);
-        // console.log("this is the messaage rec", data)
-        // const messages = myobj.message
-        // const decodedJwt:JwtDecode = jwt_decode(myobj.token);
-        // const name = decodedJwt.username
-        // const time = myobj.time
+        const email = name.split('@');
 
         //using obj instand of event
         if (obj.Event === 'send-to-ticker-room') {
