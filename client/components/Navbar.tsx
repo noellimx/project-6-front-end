@@ -1,19 +1,20 @@
 // import Navbar from 'react-bootstrap/Navbar';
 import * as React from "react";
 
-import {Button, Container, Nav, NavDropdown, Navbar, InputGroup, Form} from "react-bootstrap"
-
-
+import {Button, Container, Nav, NavDropdown, Navbar} from "react-bootstrap"
+import AsyncSelect from "react-select/async";
 import axios from "axios";
-
+import config from "../config"
 import { MAny } from "../utils/my-types";
 
-const dummyVal = "GME";
+const gomoonHttpsServer = config.httpsserver
 
-const searchByValueUrl = async (val) => {
-  const url = `https://symbol-search.tradingview.com/symbol_search/?text=${val}&hl=1&exchange=&lang=en&type=stock&domain=production`;
-  // return fetch(`https://symbol-search.tradingview.com/symbol_search/?text=${val}&hl=1&exchange=&lang=en&type=stock&domain=production`)
-  return axios.get(url, { headers: { "User-Agent": "_" } }).catch(console.log);
+const searchByValueUrl = async (searchVal) => {
+
+  return axios.get(`https://${gomoonHttpsServer}/ticker/getallticker/${searchVal}`).then((response)=>{
+
+    return response.data.results
+  })
 };
 
 const loadTickers = (prefix) => {
@@ -119,22 +120,42 @@ export default function MyNavbar({ setTicker }) {
               );
             })}
           </NavDropdown>
-          <InputGroup className="ml-5">
-            <Form.Control
-              onChange={async (e) => {
-                console.log(e.target.value);
-                const result = await searchByValueUrl(e.target.value);
+          <AsyncSelect 
+          className="searchbar-navbar"
+          menuPlacement="auto"
+          styles={{
+            menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+            menu: (base) => ({ ...base, zIndex: 9999 }),
+          }}
+          onChange={(option: { value: MAny; label: string }) => {
+            console.log("running on change")
+            console.log(option);
+            const { value: location } = option;
+            setTicker(option.value)
+          }}
+          loadOptions={async (searchVal) => {
+            const tickerResults = await searchByValueUrl(searchVal)
+              console.log("is this ticker result from axios", tickerResults)
+              console.log(tickerResults[0].description)
+            
+            const options = tickerResults.map((x) => {
 
-                console.log(result);
-              }}
-              placeholder="search"
-              aria-label="Username"
-              aria-describedby="basic-addon1"
-            />
-          </InputGroup>
+              const  description  = x.description.replace("<em>", "").replace("</em>", "");
+              const  exchange = x.exchange;
+              const ticker = x.symbol
+
+              return {
+                value: `${exchange}:${ticker}`,
+                label: description,
+              };
+            });
+            return options;
+          }}
+          />
           <Button onClick={()=>{removeToken()}}>logout</Button>
         </Nav>
       </Container>
     </Navbar>
   );
 }
+

@@ -128,6 +128,9 @@ body {
   height: 100%;
   flex: 85%;
   border: 0;
+
+  color: #fff;
+
   font-size: 1em;
   border-right: 1px dotted #607d8b;
   background: #181c27;
@@ -204,4 +207,5 @@ body {
 .p6c{
   height: 100%;
   width: 100%;
+
 }
