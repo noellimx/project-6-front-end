@@ -1,19 +1,17 @@
 // import Navbar from 'react-bootstrap/Navbar';
 import * as React from "react";
 
-import {Button, Container, Nav, NavDropdown, Navbar, InputGroup, Form} from "react-bootstrap"
+import {Button, Container, Nav, NavDropdown, Navbar} from "react-bootstrap"
 import AsyncSelect from "react-select/async";
 import axios from "axios";
-import { Box } from "@mui/material";
-import { Stack, Grid } from "@mui/material";
 import config from "../config"
-import { MAny, Location } from "../utils/my-types";
+import { MAny } from "../utils/my-types";
 
-const dummyVal = "GME";
+const gomoonHttpsServer = config.httpsserver
 
 const searchByValueUrl = async (searchVal) => {
 
-  return axios.get(`https://localhost:8080/ticker/getallticker/${searchVal}`).then((response)=>{
+  return axios.get(`https://${gomoonHttpsServer}/ticker/getallticker/${searchVal}`).then((response)=>{
 
     return response.data.results
   })
@@ -163,12 +161,3 @@ export default function MyNavbar({ setTicker }) {
   );
 }
 
-
-// country: "US"​​​
-// currency_code: "USD"
-// description: "<em>Tesla</em>, Inc."
-// exchange: "NASDAQ"
-// logoid: "tesla"
-// provider_id: "ice"
-// symbol: "TSLA"
-// type: "stock"
