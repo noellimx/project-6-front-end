@@ -23,8 +23,6 @@ const loadTickers = (prefix) => {
   return [{ symbol: "..", desc: "..." }];
 };
 
-
-
 const loadMockMyFavourite = async (token) => {
   // ask server for my fav
   return [
@@ -122,7 +120,8 @@ export default function MyNavbar({ setTicker }) {
               );
             })}
           </NavDropdown>
-          <AsyncSelect
+          <AsyncSelect 
+          className="searchbar-navbar"
           menuPlacement="auto"
           styles={{
             menuPortal: (base) => ({ ...base, zIndex: 9999 }),
@@ -136,13 +135,12 @@ export default function MyNavbar({ setTicker }) {
           }}
           loadOptions={async (searchVal) => {
             const tickerResults = await searchByValueUrl(searchVal)
-
               console.log("is this ticker result from axios", tickerResults)
               console.log(tickerResults[0].description)
             
             const options = tickerResults.map((x) => {
 
-              const  description  = x.description;
+              const  description  = x.description.replace("<em>", "").replace("</em>", "");
               const  exchange = x.exchange;
               const ticker = x.symbol
 

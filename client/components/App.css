@@ -8,49 +8,15 @@
 body {
   margin: 0%;
   padding: 0%;
+  height: 100vh;
 }
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700");
 
-.joinChatContainer {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-}
 
-.joinChatContainer h3 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-.joinChatContainer input {
-  width: 210px;
-  height: 40px;
-  margin: 7px;
-  border: 2px solid #43a047;
-  border-radius: 5px;
-  padding: 5px;
-  font-size: 16px;
-}
-
-.joinChatContainer button {
-  width: 225px;
-  height: 50px;
-  margin: 7px;
-  border: none;
-  border-radius: 5px;
-  padding: 5px;
-  font-size: 16px;
-  background: #43a047;
-  color: #181c27;
-  cursor: pointer;
-}
-
-.joinChatContainer button:hover {
-  background: #2e7d32;
-}
 
 .chat-window {
   width: 300px;
-  height: 640px;
+  height: 670px;
 }
 
 .chat-window p {
@@ -72,7 +38,7 @@ body {
 
 .chat-window .chat-body {
   height: calc(100% - (45px + 70px));
-  max-height: 550px;
+  max-height: 600px;
   width: 100%;
   border: 1px solid #030304;
   background: #181c27;
@@ -162,7 +128,9 @@ body {
   height: 100%;
   flex: 85%;
   border: 0;
-  
+
+  color: #fff;
+
   font-size: 1em;
   border-right: 1px dotted #607d8b;
   background: #181c27;
@@ -192,9 +160,17 @@ body {
 
 .div-container {
   width: 100%;  
-  height: 100%; 
+  height: 640px; 
   display: flex;
   flex-direction: row;
+  
+}
+.newsLoop {
+  width: 100%;  
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  
 }
 
 .div-element {
@@ -225,5 +201,11 @@ body {
 .message-content{
   font-size: 1.5vh;
   min-width: max-content;
+
+}
+
+.p6c{
+  height: 100%;
+  width: 100%;
 
 }
