@@ -12,7 +12,7 @@ import * as TVW from "react-tradingview-widget";
 import OldChat from "./OldChat";
 import Signin from "./Signin";
 import Rss from "./Rss";
-
+import SeachbarDropdown from "./SeachDropdown"
 import config from "../config";
 
 
@@ -137,6 +137,7 @@ console.log(token)
               hide_side_toolbar={false}
               allow_symbol_change={false}
             />
+            
             {socket && <OldChat token={token} ticker={ticker} socket={socket} /> }
             {/* <div className="div-element2">
               <Rss />
