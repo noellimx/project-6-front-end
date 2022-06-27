@@ -7,11 +7,11 @@ import axios from "axios";
 import config from "../config"
 import { MAny } from "../utils/my-types";
 
-const wsServerAddressEndpoint = config.wsserver
+const gomoonHttpsServer = config.httpsserver
 
 const searchByValueUrl = async (searchVal) => {
 
-  return axios.get(`https://${wsServerAddressEndpoint}/ticker/getallticker/${searchVal}`).then((response)=>{
+  return axios.get(`https://${gomoonHttpsServer}/ticker/getallticker/${searchVal}`).then((response)=>{
 
     return response.data.results
   })
