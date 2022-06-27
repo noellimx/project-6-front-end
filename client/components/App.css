@@ -227,3 +227,7 @@ body {
   min-width: max-content;
 
 }
+
+.searchbar-navbar{
+  min-width: 300px;
+}
