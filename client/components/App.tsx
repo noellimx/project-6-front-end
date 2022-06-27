@@ -11,7 +11,7 @@ import MyNavbar from "./Navbar";
 import * as TVW from "react-tradingview-widget";
 import OldChat from "./OldChat";
 import Signin from "./Signin";
-import Rss from "./Rss";
+import  News  from "./Newsloop";
 
 import config from "../config";
 
@@ -125,7 +125,7 @@ console.log(token)
 
   return (
     <>
-      {token === "" ? (
+   {token === "" ? (
         <Signin />
       ) : (
         <>
@@ -136,14 +136,17 @@ console.log(token)
               theme="Dark"
               hide_side_toolbar={false}
               allow_symbol_change={false}
+              autosize
             />
+            
             {socket && <OldChat token={token} ticker={ticker} socket={socket} /> }
             {/* <div className="div-element2">
               <Rss />
             </div> */}
           </div>
+          <div className="newsLoop"><News /></div>
         </>
-      )}
+       )} 
     </>
   );
 };
