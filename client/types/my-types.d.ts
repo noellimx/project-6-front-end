@@ -197,7 +197,6 @@ export type MenuedOutlet = {
   menu: Menu;
 };
 
-
 export type Favourite = {
   symbol: string;
   description: string;
