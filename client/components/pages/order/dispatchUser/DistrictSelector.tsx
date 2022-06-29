@@ -5,7 +5,7 @@ import {
   CoordinateToString,
   DistrictSelectionOnChangeFn,
   Coordinate,
-} from "../../../../utils/my-types";
+} from "../../../../types/my-types";
 
 import { ds } from "../../../../orda";
 type Location = {

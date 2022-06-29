@@ -6,7 +6,7 @@ import { TextField } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import _StdButton from "../Buttons/_StdButton";
-import { Client, TheState } from "../../utils/my-types";
+import { Client, TheState } from "../../types/my-types";
 import { useSelector } from "react-redux";
 
 import logoPng from "../../static/logo.png";

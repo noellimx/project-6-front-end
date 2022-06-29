@@ -6,7 +6,7 @@ import _StdButton from "../../../Buttons/_StdButton";
 
 import "leaflet/dist/leaflet.css";
 
-import { Client, TheState, Collection } from "../../../../utils/my-types";
+import { Client, TheState, Collection } from "../../../../types/my-types";
 import { useSelector } from "react-redux";
 import Countdown from "react-countdown";
 

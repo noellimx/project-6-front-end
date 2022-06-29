@@ -10,7 +10,7 @@ import {
   TheState,
   OrderSequence,
   Transition_DispatchUserOrder,
-} from "../../utils/my-types";
+} from "../../types/my-types";
 import { useSelector } from "react-redux";
 import DispatchUserOrdering from "./order/dispatchUser/DispatchUserOrdering";
 import DispatchUserStacking from "./order/dispatchUser/DispatchUserStacking";

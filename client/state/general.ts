@@ -1,4 +1,4 @@
-import { PayloadAction } from "../utils/my-types";
+import { PayloadAction } from "../types/my-types";
 
 export type PingInjection = PayloadAction<number>;
 

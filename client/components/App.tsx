@@ -1,33 +1,64 @@
 import * as React from "react";
 
-import { useSelector } from "react-redux";
-
-import { TheState, AuthenticationStatus, Client } from "../utils/my-types";
-import LoggedIn from "./pages/LoggedIn";
-import NotLoggedIn from "./pages/NotLoggedIn";
-import { Grid } from "@mui/material";
-
 import MyNavbar from "./Navbar";
 import * as TVW from "react-tradingview-widget";
-import OldChat from "./OldChat";
-import Signin from "./Signin";
+import Chat from "./Chat";
+import SignIn from "./SignIn";
 
-import  News  from "./Newsloop";
-
+import News from "./Newsloop";
 
 import config from "../config";
 
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Favorite from "@mui/icons-material/Favorite";
+import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+import axios from "axios";
 
-const wsServerAddressEndpoint = config.wsserver
+const gomoonHttpsServer = config.httpsserver;
+
+import { Favourite } from "../types/my-types";
+type LikeButtonProps = {
+  checked: boolean;
+  onChangeFn: () => void;
+  ticker: string;
+};
+const LikeButton: React.FC<LikeButtonProps> = ({
+  ticker,
+  checked,
+  onChangeFn,
+}) => {
+  return (
+    <div
+      style={{
+        margin: "auto",
+        display: "block",
+        width: "fit-content",
+      }}
+    >
+      <FormControlLabel
+        checked={checked}
+        onChange={onChangeFn}
+        control={
+          <Checkbox
+            style={{ border: checked ? "1px solid red" : "1px solid grey" }}
+            icon={<FavoriteBorder />}
+            checkedIcon={<Favorite />}
+            name="checkedH"
+          />
+        }
+        label={ticker}
+      />
+    </div>
+  );
+};
+
+const wsServerAddressEndpoint = config.wsserver;
 
 type MockWebSocket = {
   send: (_: string) => void;
   onopen: (fn: OnConnectionCallback) => void;
 };
-
-const foo = (): void => {}; // return void
-const bar = (): null => null; // return null
-const baz = (): undefined => undefined; // return defined
 
 type OnConnectionCallback = () => void;
 
@@ -40,8 +71,7 @@ export const sendMessageToTickerRoom: SendMessageToTickerRoom = async (
   socket,
   { token, message, roomId }
 ) => {
-
-  console.log(`[sendMessageToTickerRoom] ` , {token, message,roomId})
+  console.log(`[sendMessageToTickerRoom] `, { token, message, roomId });
   const event = "send-to-ticker-room";
   const data = { token, message, roomId, event };
   socket.send(JSON.stringify(data));
@@ -100,55 +130,122 @@ const newMockWS = (address): MockWebSocket => {
       }
     },
 
-    onopen: (cb) => {
-    },
+    onopen: (cb) => {},
   };
 };
 
-const A_DEFINITELY_INSECURE_TOKEN = "";
 interface AppProps {}
 
 const TradingViewWidget = TVW.default;
+
+const addTickerToFav2 = async (ticker, token) => {
+  ticker = ticker.replace("<em>", "").replace("</em>", "");
+
+  return axios.post(
+    `https://${gomoonHttpsServer}/favourite/addtickertofavourite`,
+    {
+      ticker,
+      token,
+    }
+  );
+};
 
 const App: React.FC<AppProps> = () => {
   const [ticker, setTicker] = React.useState<string>("NASDAQ:AAPL");
   const [socket, setSocket] = React.useState<WebSocket | MockWebSocket | null>(
     null
   );
+  const [news, setNews] = React.useState([]);
 
-  const [token, setToken] = React.useState<string>(getToken());
-console.log(token)
+  const [token, _] = React.useState<string>(getToken());
+  const [favouriteList, setFavouriteList] = React.useState<Favourite[]>([]);
+
+  const refreshFavs = () => {
+    axios
+      .get(`https://${gomoonHttpsServer}/favourite/getuserfavourite/${token}`)
+      .then((res) => {
+        console.log("axiso get user favourite ticker");
+        const results = res.data;
+        console.log(results);
+
+        const allFavourite = results.favourites.map((fav) => {
+          const symbol = fav.Ticker;
+          const description = fav.Ticker;
+          return {
+            symbol,
+            description,
+          };
+        });
+
+        console.log(`getting favs`);
+        console.log(allFavourite);
+        setFavouriteList(allFavourite);
+      });
+  };
+  const [isChecked, setIsChecked] = React.useState<boolean>(false);
+  console.log(token);
   React.useEffect(() => {
-    const _socket =true ? new WebSocket(`wss://${wsServerAddressEndpoint}`) : newMockWS("mockhost:65336");
+    const _socket = true
+      ? new WebSocket(`wss://${wsServerAddressEndpoint}`)
+      : newMockWS("mockhost:65336");
     _socket.onopen = () => {
       setSocket(_socket);
     };
   }, []);
 
+  const toggle = () => {
+    setIsChecked((t) => !t);
+  };
+
   return (
     <>
-   {token === "" ? (
-        <Signin />
+      {token === "" ? (
+        <SignIn />
       ) : (
         <>
-          <MyNavbar setTicker={setTicker} />
-          <div className="div-container">
-            <TradingViewWidget
-              symbol={ticker}
-              theme="Dark"
-              hide_side_toolbar={false}
-              allow_symbol_change={false}
-              autosize
-            />
-            
-            {socket && <OldChat token={token} ticker={ticker} socket={socket} /> }
-            {/* <div className="div-element2">
-              <Rss />
-            </div> */}
+          <MyNavbar
+            refreshFavs={refreshFavs}
+            setTicker={setTicker}
+            token={token}
+            setFavouriteList={setFavouriteList}
+            favouriteList={favouriteList}
+          />
+          <div>
+            <div>
+              {" "}
+              <LikeButton
+                ticker={ticker}
+                checked={favouriteList.map((f) => f.symbol).includes(ticker)}
+                onChangeFn={async () => {
+                  console.log("adding ticker to fav");
+
+                  if (ticker && token) {
+                    await addTickerToFav2(ticker, token);
+                  }
+                }}
+              />
+            </div>
+            <div>
+              <div className="div-container">
+                <TradingViewWidget
+                  symbol={ticker}
+                  theme="Dark"
+                  hide_side_toolbar={false}
+                  allow_symbol_change={false}
+                  autosize
+                />
+
+                {socket && (
+                  <Chat token={token} ticker={ticker} socket={socket} />
+                )}
+              </div>
+              <div className="newsLoop">
+                <News news={news} setNews={setNews} />
+              </div>
+            </div>
           </div>
-          <div className="newsLoop"><News /></div>
         </>
-       )} 
+      )}
     </>
   );
 };

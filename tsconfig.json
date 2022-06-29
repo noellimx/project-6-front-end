@@ -9,8 +9,8 @@
     "forceConsistentCasingInFileNames": true
   },
   "include": [
-    "client/components/types/svg.d.ts",
-    "client/components/types/haversine-offset.d.ts",
-    "client/components/types/react-tradingview-widget.d.ts"
+    "client/types/svg.d.ts",
+    "client/types/haversine-offset.d.ts",
+    "client/types/react-tradingview-widget.d.ts"
   ]
 }

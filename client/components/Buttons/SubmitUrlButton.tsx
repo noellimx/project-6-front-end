@@ -1,11 +1,12 @@
 import * as React from "react";
 
-import { TrulyImpure } from "../types/types";
+import { TrulyImpure } from "../../types/my-types";
 
 interface SubmitUrlButtonProps {
   onClickFn: TrulyImpure;
   shouldDisable: boolean;
 }
+
 const SubmitUrlButton: React.FC<SubmitUrlButtonProps> = ({
   onClickFn,
   shouldDisable,

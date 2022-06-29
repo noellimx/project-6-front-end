@@ -1,4 +1,4 @@
-import { PayloadAction, AuthenticationStatus } from "../utils/my-types";
+import { PayloadAction, AuthenticationStatus } from "../types/my-types";
 
 enum AuthenticationStatusCommand {
   UPDATE = "auth:validity:status:update",

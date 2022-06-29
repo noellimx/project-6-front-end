@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { createRoot } from "react-dom/client";
 
-import { MAny } from "./utils/my-types";
+import { MAny } from "./types/my-types";
 
 import App from "./components/App";
 

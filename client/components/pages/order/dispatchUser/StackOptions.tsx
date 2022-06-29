@@ -23,7 +23,7 @@ import {
   Client,
   Coordinate,
   MenuedOutlet,
-} from "../../../../utils/my-types";
+} from "../../../../types/my-types";
 
 import { Switch, Box, ButtonGroup, Button } from "@mui/material";
 

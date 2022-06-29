@@ -5,7 +5,7 @@ import _StdButton from "../../../Buttons/_StdButton";
 import "leaflet/dist/leaflet.css";
 import { useMap } from "react-leaflet";
 
-import { Coordinate } from "../../../../utils/my-types";
+import { Coordinate } from "../../../../types/my-types";
 
 import * as L from "leaflet";
 
