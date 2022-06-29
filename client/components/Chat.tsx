@@ -126,7 +126,6 @@ const ChatFooter = ({ socket, ticker, token }) => {
         }}
         onKeyPress={async (event) => event.key === "Enter" && sendThisMessage()}
       />
-      <p onClick={() => addTickerToFav(ticker, token)}>Like</p>
       <button onClick={sendThisMessage}>&#9658;</button>
     </div>
   );
