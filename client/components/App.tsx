@@ -2,7 +2,7 @@ import * as React from "react";
 
 import MyNavbar from "./Navbar";
 import * as TVW from "react-tradingview-widget";
-import OldChat from "./OldChat";
+import Chat from "./Chat";
 import SignIn from "./SignIn";
 
 import News from "./Newsloop";
@@ -132,7 +132,7 @@ const App: React.FC<AppProps> = () => {
             />
 
             {socket && (
-              <OldChat token={token} ticker={ticker} socket={socket} />
+              <Chat token={token} ticker={ticker} socket={socket} />
             )}
             {/* <div className="div-element2">
               <Rss />
