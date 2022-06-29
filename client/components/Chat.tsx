@@ -40,7 +40,7 @@ function addTickerToFav(ticker, token) {
 const ChatHeader = ({ ticker }) => {
   return (
     <div className="chat-header">
-      <p>Live Chat {`${ticker}`}</p>
+      <p>Live Chat </p>
     </div>
   );
 };
@@ -166,8 +166,10 @@ const Chat: React.FC<ChatProps> = ({ socket, ticker, token }) => {
         .get(`https://${gomoonHttpsServer}/favourite/getuserfavourite/${token}`)
         .then((res) => {
           console.log("axiso get user favourite ticker");
-          const result = res.data;
-          const allFavourite = result.map((x) => {
+          const results = res.data;
+          console.log(results);
+
+          const allFavourite = results.favourites.map((x) => {
             const value = x.value;
             const description = x.description;
             const myFavourite = {

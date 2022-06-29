@@ -9,6 +9,8 @@ import News from "./Newsloop";
 
 import config from "../config";
 
+import SubmitUrlButton from "./Buttons/SubmitUrlButton";
+
 const wsServerAddressEndpoint = config.wsserver;
 
 type MockWebSocket = {
@@ -118,21 +120,26 @@ const App: React.FC<AppProps> = () => {
       ) : (
         <>
           <MyNavbar setTicker={setTicker} />
-          <div className="div-container">
-            <TradingViewWidget
-              symbol={ticker}
-              theme="Dark"
-              hide_side_toolbar={false}
-              allow_symbol_change={false}
-              autosize
-            />
+          <div>
+            <div> <button > Like </button></div>
+            <div>
+              <div className="div-container">
+                <TradingViewWidget
+                  symbol={ticker}
+                  theme="Dark"
+                  hide_side_toolbar={false}
+                  allow_symbol_change={false}
+                  autosize
+                />
 
-            {socket && (
-              <Chat token={token} ticker={ticker} socket={socket} />
-            )}
-          </div>
-          <div className="newsLoop">
-            <News />
+                {socket && (
+                  <Chat token={token} ticker={ticker} socket={socket} />
+                )}
+              </div>
+              <div className="newsLoop">
+                <News />
+              </div>
+            </div>
           </div>
         </>
       )}

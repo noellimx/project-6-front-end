@@ -15,7 +15,7 @@ const CarouBody: React.FC<{ news: News[] }> = ({ news }) => {
     <Carousel className="p6c">
       {news.map((x: News) => {
         return (
-          <Carousel.Item>
+          <Carousel.Item key={`${x.url}`}>
             <img
               className="d-block w-100"
               src="https://picsum.photos/id/321/3440/1440"
@@ -66,7 +66,6 @@ function News() {
   }, []);
 
   console.log("news", news);
-  console.log("news.0", news[0]);
 
   return <CarouBody news={news} />;
 }
