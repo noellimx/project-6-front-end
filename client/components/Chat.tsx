@@ -11,10 +11,6 @@ import * as moment from "moment";
 import config from "../config";
 
 const gomoonHttpsServer = config.httpsserver;
-type Favourite = {
-  value: string;
-  description: string;
-};
 
 type ChatProps = {
   socket: MAny | WebSocket;
@@ -138,7 +134,6 @@ const ChatFooter = ({ socket, ticker, token }) => {
 
 const Chat: React.FC<ChatProps> = ({ socket, ticker, token }) => {
   const [messageList, setMessageList] = useState<Message[]>([]);
-  const [favouriteList, setFavourList] = useState<Favourite[]>([]);
 
   console.log(`Chat`);
 
@@ -161,25 +156,6 @@ const Chat: React.FC<ChatProps> = ({ socket, ticker, token }) => {
         return myMessage;
       });
       setMessageList(allMessage);
-
-      axios
-        .get(`https://${gomoonHttpsServer}/favourite/getuserfavourite/${token}`)
-        .then((res) => {
-          console.log("axiso get user favourite ticker");
-          const results = res.data;
-          console.log(results);
-
-          const allFavourite = results.favourites.map((x) => {
-            const value = x.value;
-            const description = x.description;
-            const myFavourite = {
-              value,
-              description,
-            };
-            return myFavourite;
-          });
-          setFavourList(allFavourite);
-        });
     });
   }, [ticker]);
 

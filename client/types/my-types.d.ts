@@ -197,6 +197,11 @@ export type MenuedOutlet = {
   menu: Menu;
 };
 
+export type Favourite = {
+  symbol: string;
+  description: string;
+};
+
 export type MenuedOutlets = MenuedOutlet[];
 
 export type DistrictSelectionOnChangeFn = (
