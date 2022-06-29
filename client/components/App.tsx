@@ -14,8 +14,13 @@ import Checkbox from "@mui/material/Checkbox";
 import Favorite from "@mui/icons-material/Favorite";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 
-const LikeButton = () => {
-  const [isChecked, setIsChecked] = React.useState(false);
+
+
+type LikeButtonProps = {
+  checked: boolean;
+  onChangeFn: () => void;
+}
+const LikeButton:React.FC<LikeButtonProps> = ({checked,onChangeFn}) => {
 
   return (
     <div
@@ -26,12 +31,8 @@ const LikeButton = () => {
       }}
     >
       <FormControlLabel
-        checked={isChecked}
-        onChange={() => {
-
-          console.log("change like button")
-          setIsChecked(t => !t);
-        }}
+        checked={checked}
+        onChange={onChangeFn}
         control={
           <Checkbox
             icon={<FavoriteBorder />}
@@ -137,6 +138,8 @@ const App: React.FC<AppProps> = () => {
   );
 
   const [token, _] = React.useState<string>(getToken());
+
+  const [isChecked, setIsChecked] = React.useState<boolean>(false);
   console.log(token);
   React.useEffect(() => {
     const _socket = true
@@ -146,6 +149,11 @@ const App: React.FC<AppProps> = () => {
       setSocket(_socket);
     };
   }, []);
+
+
+  const toggle = () => {
+    setIsChecked(t=>!t)
+  }
 
   return (
     <>
@@ -157,7 +165,7 @@ const App: React.FC<AppProps> = () => {
           <div>
             <div>
               {" "}
-              <LikeButton />
+              <LikeButton checked={isChecked} onChangeFn={toggle} />
             </div>
             <div>
               <div className="div-container">

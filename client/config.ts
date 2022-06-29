@@ -1,8 +1,10 @@
 import { Config } from "./types/my-types";
+
+
 const config: Config = {
   env: "production",
-  wsserver: "localhost:8080/ws",
-  httpsserver: "localhost:8080",
+  wsserver: "fruitt.art:8443/ws",
+  httpsserver: "fruitt.art:8443",
 };
 
 export default config;
