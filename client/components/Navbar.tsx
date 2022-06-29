@@ -45,8 +45,9 @@ const loadFavourite = loadMockMyFavourite;
 export default function MyNavbar({
   setTicker,
   favouriteList,
-  setFavouriteList,token
-  ,refreshFavs
+  setFavouriteList,
+  token,
+  refreshFavs,
 }) {
   React.useEffect(() => {
     (async () => {})();
@@ -61,10 +62,10 @@ export default function MyNavbar({
         <Nav className="me-auto">
           <NavDropdown
             onClick={() => {
-              if(!token) {
-                return
+              if (!token) {
+                return;
               }
-              refreshFavs()
+              refreshFavs();
             }}
             title="Favourites"
             id="basic-nav-dropdown"
@@ -122,8 +123,6 @@ export default function MyNavbar({
               return (
                 <NavDropdown.Item
                   onClick={() => {
-
-
                     setTicker(symbol);
                   }}
                 >
@@ -155,8 +154,9 @@ export default function MyNavbar({
                   .replace("<em>", "")
                   .replace("</em>", "");
                 const exchange = x.exchange;
-                const ticker = x.symbol.replace("<em>", "")
-                .replace("</em>", "");
+                const ticker = x.symbol
+                  .replace("<em>", "")
+                  .replace("</em>", "");
 
                 return {
                   value: `${exchange}:${ticker}`,

@@ -17,15 +17,17 @@ import axios from "axios";
 
 const gomoonHttpsServer = config.httpsserver;
 
-
-import {Favourite} from "../types/my-types"
+import { Favourite } from "../types/my-types";
 type LikeButtonProps = {
   checked: boolean;
   onChangeFn: () => void;
   ticker: string;
-}
-const LikeButton:React.FC<LikeButtonProps> = ({ticker,checked,onChangeFn}) => {
-
+};
+const LikeButton: React.FC<LikeButtonProps> = ({
+  ticker,
+  checked,
+  onChangeFn,
+}) => {
   return (
     <div
       style={{
@@ -39,7 +41,7 @@ const LikeButton:React.FC<LikeButtonProps> = ({ticker,checked,onChangeFn}) => {
         onChange={onChangeFn}
         control={
           <Checkbox
-          style= { { border : checked ? "1px solid red" : "1px solid grey"}}
+            style={{ border: checked ? "1px solid red" : "1px solid grey" }}
             icon={<FavoriteBorder />}
             checkedIcon={<Favorite />}
             name="checkedH"
@@ -136,20 +138,17 @@ interface AppProps {}
 
 const TradingViewWidget = TVW.default;
 
-
-const addTickerToFav2 = async (ticker,token) => {
-
+const addTickerToFav2 = async (ticker, token) => {
   ticker = ticker.replace("<em>", "").replace("</em>", "");
 
-
-  return axios
-    .post(`https://${gomoonHttpsServer}/favourite/addtickertofavourite`, {
-      ticker,token
-    })}
-    
-    
-    ;
-
+  return axios.post(
+    `https://${gomoonHttpsServer}/favourite/addtickertofavourite`,
+    {
+      ticker,
+      token,
+    }
+  );
+};
 
 const App: React.FC<AppProps> = () => {
   const [ticker, setTicker] = React.useState<string>("NASDAQ:AAPL");
@@ -161,35 +160,28 @@ const App: React.FC<AppProps> = () => {
   const [token, _] = React.useState<string>(getToken());
   const [favouriteList, setFavouriteList] = React.useState<Favourite[]>([]);
 
-
   const refreshFavs = () => {
-
     axios
-                .get(
-                  `https://${gomoonHttpsServer}/favourite/getuserfavourite/${token}`
-                )
-                .then((res) => {
-                  console.log("axiso get user favourite ticker");
-                  const results = res.data;
-                  console.log(results);
+      .get(`https://${gomoonHttpsServer}/favourite/getuserfavourite/${token}`)
+      .then((res) => {
+        console.log("axiso get user favourite ticker");
+        const results = res.data;
+        console.log(results);
 
-                  const allFavourite = results.favourites.map((fav) => {
-                    const symbol = fav.Ticker;
-                    const description = fav.Ticker;
-                    return {
-                      symbol,
-                      description,
-                    };
-                  });
+        const allFavourite = results.favourites.map((fav) => {
+          const symbol = fav.Ticker;
+          const description = fav.Ticker;
+          return {
+            symbol,
+            description,
+          };
+        });
 
-                  console.log(`getting favs`)
-                  console.log(allFavourite)
-                  setFavouriteList(allFavourite);
-                });
-
-
-                
-  }
+        console.log(`getting favs`);
+        console.log(allFavourite);
+        setFavouriteList(allFavourite);
+      });
+  };
   const [isChecked, setIsChecked] = React.useState<boolean>(false);
   console.log(token);
   React.useEffect(() => {
@@ -201,10 +193,9 @@ const App: React.FC<AppProps> = () => {
     };
   }, []);
 
-
   const toggle = () => {
-    setIsChecked(t=>!t)
-  }
+    setIsChecked((t) => !t);
+  };
 
   return (
     <>
@@ -212,22 +203,27 @@ const App: React.FC<AppProps> = () => {
         <SignIn />
       ) : (
         <>
-          <MyNavbar refreshFavs={refreshFavs} setTicker={setTicker} token={token} setFavouriteList={setFavouriteList} favouriteList={favouriteList} />
+          <MyNavbar
+            refreshFavs={refreshFavs}
+            setTicker={setTicker}
+            token={token}
+            setFavouriteList={setFavouriteList}
+            favouriteList={favouriteList}
+          />
           <div>
             <div>
               {" "}
-              <LikeButton ticker={ticker} checked={favouriteList.map((f) => f.symbol).includes(ticker)} onChangeFn={async() => {
+              <LikeButton
+                ticker={ticker}
+                checked={favouriteList.map((f) => f.symbol).includes(ticker)}
+                onChangeFn={async () => {
+                  console.log("adding ticker to fav");
 
-console.log("adding ticker to fav")
-
-if ( ticker && token){
-
-  await addTickerToFav2(ticker,token);
-
-}
-
-
-              }} />
+                  if (ticker && token) {
+                    await addTickerToFav2(ticker, token);
+                  }
+                }}
+              />
             </div>
             <div>
               <div className="div-container">

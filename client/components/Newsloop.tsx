@@ -36,8 +36,7 @@ const CarouBody: React.FC<{ news: News[] }> = ({ news }) => {
   );
 };
 
-function News({news, setNews}) {
-
+function News({ news, setNews }) {
   const options: MAny = {
     method: "GET",
     url: "https://api.nytimes.com/svc/news/v3/content/nyt/business.json?api-key=I33TGJlzvDObwqvH3Jm7VV54oKcUUKAT",

@@ -12,7 +12,6 @@ import config from "../config";
 
 const gomoonHttpsServer = config.httpsserver;
 
-
 type ChatProps = {
   socket: MAny | WebSocket;
   ticker: string;
@@ -157,8 +156,6 @@ const Chat: React.FC<ChatProps> = ({ socket, ticker, token }) => {
         return myMessage;
       });
       setMessageList(allMessage);
-
-      
     });
   }, [ticker]);
 
