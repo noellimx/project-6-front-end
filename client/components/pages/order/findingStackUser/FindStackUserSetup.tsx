@@ -4,7 +4,6 @@ import * as React from "react";
 
 import _StdButton from "../../../Buttons/_StdButton";
 
-
 import "leaflet/dist/leaflet.css";
 
 import { currentLocationIcon } from "../Iconz";

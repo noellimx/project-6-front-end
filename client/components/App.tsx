@@ -9,7 +9,40 @@ import News from "./Newsloop";
 
 import config from "../config";
 
-import SubmitUrlButton from "./Buttons/SubmitUrlButton";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Favorite from "@mui/icons-material/Favorite";
+import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+
+const LikeButton = () => {
+  const [isChecked, setIsChecked] = React.useState(false);
+
+  return (
+    <div
+      style={{
+        margin: "auto",
+        display: "block",
+        width: "fit-content",
+      }}
+    >
+      <h3>How to use HeartCheckBox in ReactJS?</h3>
+      <FormControlLabel
+        checked={isChecked}
+        onChange={() => {
+          (setIsChecked) => !setIsChecked;
+        }}
+        control={
+          <Checkbox
+            icon={<FavoriteBorder />}
+            checkedIcon={<Favorite />}
+            name="checkedH"
+          />
+        }
+        label="Instagram Like Button"
+      />
+    </div>
+  );
+};
 
 const wsServerAddressEndpoint = config.wsserver;
 
@@ -121,7 +154,10 @@ const App: React.FC<AppProps> = () => {
         <>
           <MyNavbar setTicker={setTicker} />
           <div>
-            <div> <button > Like </button></div>
+            <div>
+              {" "}
+              <LikeButton />
+            </div>
             <div>
               <div className="div-container">
                 <TradingViewWidget
