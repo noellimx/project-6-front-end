@@ -1,6 +1,6 @@
 //  Template, and also configuration for server.
 //  Refer to typings for remarks
-import { Config } from "./utils/my-types";
+import { Config } from "./types/my-types";
 
 const config: Config = {
   env: "production",

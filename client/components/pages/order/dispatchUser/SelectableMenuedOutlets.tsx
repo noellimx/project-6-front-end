@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import {} from "../../../../utils/my-types";
+import {} from "../../../../types/my-types";
 
 import { Card, CardContent, Typography } from "@mui/material";
 
-import { MenuedOutlets, MenuedOutlet } from "../../../../utils/my-types";
+import { MenuedOutlets, MenuedOutlet } from "../../../../types/my-types";
 
 interface SelectableMenusProps {
   selectableMenuedOutlets: MenuedOutlets;

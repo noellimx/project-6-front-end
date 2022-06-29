@@ -1,9 +1,9 @@
 import { ButtonGroup, Button, Container, Stack } from "@mui/material";
 import * as React from "react";
 
-import { TrulyImpure } from "../../../../utils/my-types";
+import { TrulyImpure } from "../../../../types/my-types";
 
-import { SelectableMenu, SelectableMenuItem } from "../../../../utils/my-types";
+import { SelectableMenu, SelectableMenuItem } from "../../../../types/my-types";
 
 import { Box, Grid } from "@mui/material";
 

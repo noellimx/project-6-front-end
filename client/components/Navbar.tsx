@@ -5,7 +5,7 @@ import { Button, Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import AsyncSelect from "react-select/async";
 import axios from "axios";
 import config from "../config";
-import { MAny } from "../utils/my-types";
+import { MAny } from "../types/my-types";
 
 const gomoonHttpsServer = config.httpsserver;
 

@@ -5,7 +5,7 @@ import {
   Transition_DispatchUserOrder,
   Transition_Nil,
   Collection,
-} from "../utils/my-types";
+} from "../types/my-types";
 
 /** Order Sequence */
 enum OrderSequenceCommand {

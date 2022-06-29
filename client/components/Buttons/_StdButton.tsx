@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { TrulyImpure } from "../../utils/my-types";
+import { TrulyImpure } from "../../types/my-types";
 
 import Button from "@mui/material/Button";
 

@@ -7,7 +7,7 @@ import "leaflet/dist/leaflet.css";
 import { Stack, Grid } from "@mui/material";
 import AsyncSelect from "react-select/async";
 
-import { Client, Coordinate, Location } from "../../../../utils/my-types";
+import { Client, Coordinate, Location } from "../../../../types/my-types";
 
 import { Box } from "@mui/material";
 

@@ -1,7 +1,7 @@
 import * as React from "react";
 import Carousel from "react-bootstrap/Carousel";
 import axios from "axios";
-import { MAny } from "../utils/my-types";
+import { MAny } from "../types/my-types";
 import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses";
 
 type News = {

@@ -4,7 +4,7 @@ import {
   UserPassSubmitFn,
   AuthenticationTrigger,
   AuthenticationStatus,
-} from "../utils/my-types";
+} from "../types/my-types";
 import { getAccessToken, storeAccessToken } from "../operations/authentication";
 import {
   authenticationStatusInjector,

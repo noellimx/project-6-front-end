@@ -3,15 +3,11 @@
 import * as React from "react";
 
 import _StdButton from "../../../Buttons/_StdButton";
-// import DistrictSelector from "./DistrictSelector";
-// import StackOptions from "./StackOptions";
-// import SelectableMenuedOutlets from "./SelectableMenuedOutlets";
-// import MenuSelection from "./MenuSelection";
+
 
 import "leaflet/dist/leaflet.css";
 
-import haversineOffset from "haversine-offset";
-import { outletIcon, endLocationIcon, currentLocationIcon } from ".././Iconz";
+import { currentLocationIcon } from "../Iconz";
 
 import {
   SelectableMenu,
@@ -24,7 +20,7 @@ import {
   CandidateCollection,
   OrderFlow,
   Transition_FindingStack,
-} from "../../../../utils/my-types";
+} from "../../../../types/my-types";
 import { useSelector } from "react-redux";
 
 import { MapContainer, TileLayer, Marker, Circle } from "react-leaflet";

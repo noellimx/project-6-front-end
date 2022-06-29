@@ -24,7 +24,7 @@ import {
   TheState,
   Transition_DispatchUserOrder,
   OrderFlow,
-} from "../../../../utils/my-types";
+} from "../../../../types/my-types";
 
 import { Grid } from "@mui/material";
 import { useSelector } from "react-redux";

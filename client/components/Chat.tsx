@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import * as ScrollToBottom from "react-scroll-to-bottom";
 import "./App.css";
 import { Col, Row } from "react-bootstrap";
-import { MAny } from "../utils/my-types";
+import { MAny } from "../types/my-types";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import * as moment from "moment";

@@ -16,10 +16,6 @@ type MockWebSocket = {
   onopen: (fn: OnConnectionCallback) => void;
 };
 
-const foo = (): void => {}; // return void
-const bar = (): null => null; // return null
-const baz = (): undefined => undefined; // return defined
-
 type OnConnectionCallback = () => void;
 
 type SendMessageToTickerRoom = (

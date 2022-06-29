@@ -1,4 +1,4 @@
-import { MAny } from "../../utils/my-types";
+import { MAny } from "../../types/my-types";
 
 // config.d.ts
 declare module "react-tradingview-widget" {

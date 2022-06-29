@@ -6,7 +6,7 @@ import {
   OrderTrigger,
   Transition_FindingStack,
   Collection,
-} from "../utils/my-types";
+} from "../types/my-types";
 
 import { getAccessToken } from "../operations/authentication";
 import { Store } from "@reduxjs/toolkit";
