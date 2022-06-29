@@ -104,7 +104,7 @@ const App: React.FC<AppProps> = () => {
     null
   );
 
-  const [token, setToken] = React.useState<string>(getToken());
+  const [token, _] = React.useState<string>(getToken());
   console.log(token);
   React.useEffect(() => {
     const _socket = true
@@ -134,9 +134,6 @@ const App: React.FC<AppProps> = () => {
             {socket && (
               <Chat token={token} ticker={ticker} socket={socket} />
             )}
-            {/* <div className="div-element2">
-              <Rss />
-            </div> */}
           </div>
           <div className="newsLoop">
             <News />
