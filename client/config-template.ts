@@ -4,7 +4,7 @@ import { Config } from "./utils/my-types";
 
 const config: Config = {
   env: "production",
-  wsserver: "fruitt.art:8080/ws",
+  wsserver: "fruitt.art:8443/ws",
   httpsserver: "fruitt.art:8443",
 };
 
