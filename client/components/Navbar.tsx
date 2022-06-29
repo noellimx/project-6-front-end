@@ -42,13 +42,14 @@ const loadServerMyFav = async () => {}; // TODO
 
 const loadFavourite = loadMockMyFavourite;
 
-export default function MyNavbar({ setTicker }) {
-  const [favs, setFavs] = React.useState<MAny>([]);
+export default function MyNavbar({
+  setTicker,
+  favouriteList,
+  setFavouriteList,token
+  ,refreshFavs
+}) {
   React.useEffect(() => {
-    (async () => {
-      const favs = await loadMockMyFavourite("my-token");
-      setFavs(favs);
-    })();
+    (async () => {})();
     return () => {};
   }, []);
 
@@ -58,8 +59,17 @@ export default function MyNavbar({ setTicker }) {
         <Navbar.Brand href="/">GoMoon</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Nav className="me-auto">
-          <NavDropdown title="Favourites" id="basic-nav-dropdown">
-            {favs.map(({ symbol, desc }) => {
+          <NavDropdown
+            onClick={() => {
+              if(!token) {
+                return
+              }
+              refreshFavs()
+            }}
+            title="Favourites"
+            id="basic-nav-dropdown"
+          >
+            {favouriteList.map(({ symbol, description }) => {
               return (
                 <NavDropdown.Item
                   key={symbol}
@@ -68,7 +78,7 @@ export default function MyNavbar({ setTicker }) {
                   }}
                 >
                   {" "}
-                  {desc}
+                  {description}
                 </NavDropdown.Item>
               );
             })}
@@ -112,6 +122,8 @@ export default function MyNavbar({ setTicker }) {
               return (
                 <NavDropdown.Item
                   onClick={() => {
+
+
                     setTicker(symbol);
                   }}
                 >
@@ -143,7 +155,8 @@ export default function MyNavbar({ setTicker }) {
                   .replace("<em>", "")
                   .replace("</em>", "");
                 const exchange = x.exchange;
-                const ticker = x.symbol;
+                const ticker = x.symbol.replace("<em>", "")
+                .replace("</em>", "");
 
                 return {
                   value: `${exchange}:${ticker}`,

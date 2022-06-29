@@ -2,7 +2,6 @@ import * as React from "react";
 import Carousel from "react-bootstrap/Carousel";
 import axios from "axios";
 import { MAny } from "../types/my-types";
-import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses";
 
 type News = {
   title: string;
@@ -37,8 +36,7 @@ const CarouBody: React.FC<{ news: News[] }> = ({ news }) => {
   );
 };
 
-function News() {
-  const [news, setNews] = React.useState([]);
+function News({news, setNews}) {
 
   const options: MAny = {
     method: "GET",
