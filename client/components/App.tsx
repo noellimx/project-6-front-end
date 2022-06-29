@@ -25,11 +25,12 @@ const LikeButton = () => {
         width: "fit-content",
       }}
     >
-      <h3>How to use HeartCheckBox in ReactJS?</h3>
       <FormControlLabel
         checked={isChecked}
         onChange={() => {
-          (setIsChecked) => !setIsChecked;
+
+          console.log("change like button")
+          setIsChecked(t => !t);
         }}
         control={
           <Checkbox
