@@ -12,6 +12,8 @@
 
 ## Dev Server
 
+See `./server`
+
 ## Dev Server Config
 
 Configuration defaults to production environment in the browser.
