@@ -4,6 +4,16 @@ import { Store } from "redux";
 import { ReactNode } from "react";
 import { SelectChangeEvent } from "@mui/material";
 
+export const enum Environment {
+  TEST = "test",
+  PRODUCTION = "production",
+}
+
+export type Config = {
+  env: "test" | "production"; // Environment to toggle between mock and production components
+  httpsserver: string; // The url to establish https connection
+  wsserver: string; // The url to upgrade the connection
+};
 export type MAny = any; // This type indicates to be defined explicitly
 
 export type TrulyImpure = () => void;

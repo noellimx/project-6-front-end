@@ -1,14 +1,14 @@
-import * as React from 'react';
-import { useState, useEffect } from 'react';
-import * as ScrollToBottom from 'react-scroll-to-bottom';
-import './App.css';
-import { Col, Row } from 'react-bootstrap';
-import { MAny } from '../utils/my-types';
-import axios from 'axios';
-import jwt_decode from 'jwt-decode';
-import * as moment from 'moment';
+import * as React from "react";
+import { useState, useEffect } from "react";
+import * as ScrollToBottom from "react-scroll-to-bottom";
+import "./App.css";
+import { Col, Row } from "react-bootstrap";
+import { MAny } from "../utils/my-types";
+import axios from "axios";
+import jwt_decode from "jwt-decode";
+import * as moment from "moment";
 
-import config from '../config';
+import config from "../config";
 
 const gomoonHttpsServer = config.httpsserver;
 type Favourite = {
@@ -33,7 +33,7 @@ type JwtDecode = {
 };
 
 function addTickerToFav(ticker, token) {
-  console.log('addticker to fav ticker and token', ticker, token);
+  console.log("addticker to fav ticker and token", ticker, token);
   axios.get(`/favorite/addtickertofavourite/${ticker}/${token}`);
 }
 
@@ -48,7 +48,7 @@ const ChatHeader = ({ ticker }) => {
 const ChatBody: React.FC<{ messageList: Message[] }> = ({ messageList }) => {
   return (
     <div className="chat-body">
-      <ScrollToBottom.default className={'message-container'}>
+      <ScrollToBottom.default className={"message-container"}>
         {messageList.map((messageContent: Message) => {
           return (
             <div className="message" key={`${messageContent.time}`}>
@@ -69,7 +69,7 @@ const ChatBody: React.FC<{ messageList: Message[] }> = ({ messageList }) => {
                   <Col className="col-4 message-time-col align-self-end">
                     <Row>
                       <p className="message-time" id="time">
-                        {moment(messageContent.time).format('LT')}
+                        {moment(messageContent.time).format("LT")}
                       </p>
                     </Row>
                   </Col>
@@ -94,7 +94,7 @@ const sendMessage = async (
 
   //send message to socket
   const data = {
-    event: 'send-to-ticker-room',
+    event: "send-to-ticker-room",
     token,
     message,
     roomId,
@@ -109,14 +109,14 @@ const sendMessage = async (
 const ChatFooter = ({ socket, ticker, token }) => {
   const roomId = ticker;
 
-  const [textField, setTextField] = useState<string>('');
+  const [textField, setTextField] = useState<string>("");
 
   const sendThisMessage = () => {
-    setTextField('');
+    setTextField("");
     console.log(`[sendThisMessage]`);
     const decodedJwt: JwtDecode = jwt_decode(token);
     const name = decodedJwt.username;
-    console.log('getting username from sendThisMessage', name);
+    console.log("getting username from sendThisMessage", name);
     sendMessage(socket, roomId, token, textField, name);
   };
   return (
@@ -128,7 +128,7 @@ const ChatFooter = ({ socket, ticker, token }) => {
         onChange={(event) => {
           setTextField(event.target.value);
         }}
-        onKeyPress={async (event) => event.key === 'Enter' && sendThisMessage()}
+        onKeyPress={async (event) => event.key === "Enter" && sendThisMessage()}
       />
       <p onClick={() => addTickerToFav(ticker, token)}>Like</p>
       <button onClick={sendThisMessage}>&#9658;</button>
@@ -143,16 +143,16 @@ const Chat: React.FC<ChatProps> = ({ socket, ticker, token }) => {
   console.log(`Chat`);
 
   useEffect(() => {
-    const data = { event: 'subsribe-to-ticker-room', token, roomId: ticker };
-    console.log('sending to socket with event subsribe-to-ticker', data);
+    const data = { event: "subsribe-to-ticker-room", token, roomId: ticker };
+    console.log("sending to socket with event subsribe-to-ticker", data);
     socket.send(JSON.stringify(data));
 
     setMessageList([]);
     axios.get(`https://${gomoonHttpsServer}/history/${ticker}`).then((res) => {
-      console.log('axios get chat all history');
+      console.log("axios get chat all history");
       const result = res.data;
       const allMessage = result.map((x) => {
-        const email = x.Username.split('@');
+        const email = x.Username.split("@");
         const myMessage = {
           author: email[0],
           message: x.Message,
@@ -165,7 +165,7 @@ const Chat: React.FC<ChatProps> = ({ socket, ticker, token }) => {
       axios
         .get(`https://${gomoonHttpsServer}/favourite/getuserfavourite/${token}`)
         .then((res) => {
-          console.log('axiso get user favourite ticker');
+          console.log("axiso get user favourite ticker");
           const result = res.data;
           const allFavourite = result.map((x) => {
             const value = x.value;
@@ -182,7 +182,7 @@ const Chat: React.FC<ChatProps> = ({ socket, ticker, token }) => {
   }, [ticker]);
 
   useEffect(() => {
-    console.log('Chat use effect []');
+    console.log("Chat use effect []");
     console.log(socket);
 
     const broadcastReceiver = async (event: MessageEvent) => {
@@ -199,11 +199,11 @@ const Chat: React.FC<ChatProps> = ({ socket, ticker, token }) => {
 
         const name = obj.Message.Username;
         const time = obj.Message.Time;
-        const email = name.split('@');
+        const email = name.split("@");
 
         //using obj instand of event
-        if (obj.Event === 'send-to-ticker-room') {
-          console.log('broadcasting to specific room');
+        if (obj.Event === "send-to-ticker-room") {
+          console.log("broadcasting to specific room");
           try {
             const message = {
               author: email[0],
@@ -219,14 +219,14 @@ const Chat: React.FC<ChatProps> = ({ socket, ticker, token }) => {
           }
         }
       } catch (err) {
-        console.log('error in broadcasting try catch', err);
+        console.log("error in broadcasting try catch", err);
       }
     };
 
-    socket && socket.addEventListener('message', broadcastReceiver);
+    socket && socket.addEventListener("message", broadcastReceiver);
 
     return () => {
-      socket && socket.removeEventListener('message', broadcastReceiver);
+      socket && socket.removeEventListener("message", broadcastReceiver);
     };
   }, [socket]);
 

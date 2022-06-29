@@ -1,24 +1,15 @@
 import * as React from "react";
 
-import { useSelector } from "react-redux";
-
-import { TheState, AuthenticationStatus, Client } from "../utils/my-types";
-import LoggedIn from "./pages/LoggedIn";
-import NotLoggedIn from "./pages/NotLoggedIn";
-import { Grid } from "@mui/material";
-
 import MyNavbar from "./Navbar";
 import * as TVW from "react-tradingview-widget";
 import OldChat from "./OldChat";
-import Signin from "./Signin";
+import SignIn from "./SignIn";
 
-import  News  from "./Newsloop";
-
+import News from "./Newsloop";
 
 import config from "../config";
 
-
-const wsServerAddressEndpoint = config.wsserver
+const wsServerAddressEndpoint = config.wsserver;
 
 type MockWebSocket = {
   send: (_: string) => void;
@@ -40,8 +31,7 @@ export const sendMessageToTickerRoom: SendMessageToTickerRoom = async (
   socket,
   { token, message, roomId }
 ) => {
-
-  console.log(`[sendMessageToTickerRoom] ` , {token, message,roomId})
+  console.log(`[sendMessageToTickerRoom] `, { token, message, roomId });
   const event = "send-to-ticker-room";
   const data = { token, message, roomId, event };
   socket.send(JSON.stringify(data));
@@ -100,12 +90,10 @@ const newMockWS = (address): MockWebSocket => {
       }
     },
 
-    onopen: (cb) => {
-    },
+    onopen: (cb) => {},
   };
 };
 
-const A_DEFINITELY_INSECURE_TOKEN = "";
 interface AppProps {}
 
 const TradingViewWidget = TVW.default;
@@ -117,9 +105,11 @@ const App: React.FC<AppProps> = () => {
   );
 
   const [token, setToken] = React.useState<string>(getToken());
-console.log(token)
+  console.log(token);
   React.useEffect(() => {
-    const _socket =true ? new WebSocket(`wss://${wsServerAddressEndpoint}`) : newMockWS("mockhost:65336");
+    const _socket = true
+      ? new WebSocket(`wss://${wsServerAddressEndpoint}`)
+      : newMockWS("mockhost:65336");
     _socket.onopen = () => {
       setSocket(_socket);
     };
@@ -127,8 +117,8 @@ console.log(token)
 
   return (
     <>
-   {token === "" ? (
-        <Signin />
+      {token === "" ? (
+        <SignIn />
       ) : (
         <>
           <MyNavbar setTicker={setTicker} />
@@ -140,15 +130,19 @@ console.log(token)
               allow_symbol_change={false}
               autosize
             />
-            
-            {socket && <OldChat token={token} ticker={ticker} socket={socket} /> }
+
+            {socket && (
+              <OldChat token={token} ticker={ticker} socket={socket} />
+            )}
             {/* <div className="div-element2">
               <Rss />
             </div> */}
           </div>
-          <div className="newsLoop"><News /></div>
+          <div className="newsLoop">
+            <News />
+          </div>
         </>
-       )} 
+      )}
     </>
   );
 };

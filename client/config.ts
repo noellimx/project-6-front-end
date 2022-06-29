@@ -1,7 +1,8 @@
-const config = {
-  env: "production", // or test
-  wsserver: "fruitt.art:8443/ws", // without specify scheme. Example "______:8080/ws" , "mockserver:8080/ws"
-  httpsserver: "fruitt.art:8443"
+import { Config } from "./utils/my-types";
+const config: Config = {
+  env: "production",
+  wsserver: "localhost:8443/ws",
+  httpsserver: "localhost:3004",
 };
 
 export default config;

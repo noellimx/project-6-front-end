@@ -1,9 +1,7 @@
-
-
 name: EC2 Deployment
-on: 
+on:
   push:
-    branches: 
+    branches:
       - deploy
 jobs:
   deployment:
@@ -36,7 +34,6 @@ jobs:
           username: ubuntu
           source: "./dist"
           target: "./"
-
 
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master

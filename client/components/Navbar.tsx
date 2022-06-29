@@ -1,20 +1,20 @@
 // import Navbar from 'react-bootstrap/Navbar';
 import * as React from "react";
 
-import {Button, Container, Nav, NavDropdown, Navbar} from "react-bootstrap"
+import { Button, Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import AsyncSelect from "react-select/async";
 import axios from "axios";
-import config from "../config"
+import config from "../config";
 import { MAny } from "../utils/my-types";
 
-const gomoonHttpsServer = config.httpsserver
+const gomoonHttpsServer = config.httpsserver;
 
 const searchByValueUrl = async (searchVal) => {
-
-  return axios.get(`https://${gomoonHttpsServer}/ticker/getallticker/${searchVal}`).then((response)=>{
-
-    return response.data.results
-  })
+  return axios
+    .get(`https://${gomoonHttpsServer}/ticker/getallticker/${searchVal}`)
+    .then((response) => {
+      return response.data.results;
+    });
 };
 
 const loadTickers = (prefix) => {
@@ -31,10 +31,10 @@ const loadMockMyFavourite = async (token) => {
   ];
 };
 
-const removeToken=()=>{
-  document.cookie = 'gm-token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'
+const removeToken = () => {
+  document.cookie = "gm-token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
   window.location.reload();
-}
+};
 
 const loadServerMyFav = async () => {}; // TODO
 // const loadFavourite =
@@ -120,42 +120,48 @@ export default function MyNavbar({ setTicker }) {
               );
             })}
           </NavDropdown>
-          <AsyncSelect 
-          className="searchbar-navbar"
-          menuPlacement="auto"
-          styles={{
-            menuPortal: (base) => ({ ...base, zIndex: 9999 }),
-            menu: (base) => ({ ...base, zIndex: 9999 }),
-          }}
-          onChange={(option: { value: MAny; label: string }) => {
-            console.log("running on change")
-            console.log(option);
-            const { value: location } = option;
-            setTicker(option.value)
-          }}
-          loadOptions={async (searchVal) => {
-            const tickerResults = await searchByValueUrl(searchVal)
-              console.log("is this ticker result from axios", tickerResults)
-              console.log(tickerResults[0].description)
-            
-            const options = tickerResults.map((x) => {
+          <AsyncSelect
+            className="searchbar-navbar"
+            menuPlacement="auto"
+            styles={{
+              menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+              menu: (base) => ({ ...base, zIndex: 9999 }),
+            }}
+            onChange={(option: { value: MAny; label: string }) => {
+              console.log("running on change");
+              console.log(option);
+              const { value: location } = option;
+              setTicker(option.value);
+            }}
+            loadOptions={async (searchVal) => {
+              const tickerResults = await searchByValueUrl(searchVal);
+              console.log("is this ticker result from axios", tickerResults);
+              console.log(tickerResults[0].description);
 
-              const  description  = x.description.replace("<em>", "").replace("</em>", "");
-              const  exchange = x.exchange;
-              const ticker = x.symbol
+              const options = tickerResults.map((x) => {
+                const description = x.description
+                  .replace("<em>", "")
+                  .replace("</em>", "");
+                const exchange = x.exchange;
+                const ticker = x.symbol;
 
-              return {
-                value: `${exchange}:${ticker}`,
-                label: description,
-              };
-            });
-            return options;
-          }}
+                return {
+                  value: `${exchange}:${ticker}`,
+                  label: description,
+                };
+              });
+              return options;
+            }}
           />
-          <Button onClick={()=>{removeToken()}}>logout</Button>
+          <Button
+            onClick={() => {
+              removeToken();
+            }}
+          >
+            logout
+          </Button>
         </Nav>
       </Container>
     </Navbar>
   );
 }
-
